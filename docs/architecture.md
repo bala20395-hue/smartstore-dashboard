@@ -2,16 +2,16 @@
 
 ## Purpose
 
-SmartStore is a small product-management dashboard used to demonstrate frontend, backend, accessibility, and deployment fundamentals.
+SmartStore is a product-management dashboard demonstrating frontend, backend, accessibility, and deployment fundamentals.
 
 ## System boundaries
 
-- `client/`: browser UI, semantic HTML, CSS, user interactions, API client, and browser-side cache.
-- `server/`: HTTP server, product REST endpoints, request validation, and demonstration data.
-- `docs/`: architecture and audit evidence.
-- `tests/`: automated tests.
+- `client/`: browser interface, semantic markup, CSS, interactions, API client, and LocalStorage cache.
+- `server/`: Express HTTP server, REST routes, request validation, and demo records.
+- `docs/`: audit, architecture, deployment, and evidence documentation.
+- `tests/`: automated validation tests.
 
-## Request flow: product listing
+## Product listing flow
 
 ```text
 Browser page
@@ -20,12 +20,35 @@ Browser page
   -> GET /api/products
   -> server/src/routes/products.js
   -> JSON product array
-  -> render accessible product table
+  -> accessible product table
 ```
 
-## Request flow: add or edit product
+## Add / edit / delete flow
 
-The browser validates required fields, sends JSON to the Express API, updates the in-memory server collection, then refreshes the visible table and LocalStorage cache.
+The browser validates fields and sends JSON to Express. The server validates the payload in `productValidation.js`, updates its in-memory collection, and returns JSON. The browser refreshes the table and LocalStorage cache.
+
+## System diagram
+
+```text
++--------------------------+
+| Browser: HTML / CSS / JS |
++------------+-------------+
+             |
+             v
++--------------------------+
+| API client: fetch + JSON |
++------------+-------------+
+             |
+             v
++--------------------------+
+| Express REST endpoints   |
++------------+-------------+
+             |
+             v
++--------------------------+
+| Validation + demo data   |
++--------------------------+
+```
 
 ## Local setup
 
@@ -34,18 +57,20 @@ The browser validates required fields, sends JSON to the Express API, updates th
 3. Run `npm install`.
 4. Run `npm run dev`.
 5. Visit `http://localhost:3000`.
+6. Run automated tests with `npm test` from `server/`.
+
+## Accessibility implementation
+
+- Semantic landmarks: `header`, `nav`, `main`, `section`, and `footer`.
+- Skip link to main content.
+- Visible focus indicators.
+- Labelled controls and inline error descriptions.
+- `aria-invalid` updated for invalid form fields.
+- Status messages use `role="status"` and `aria-live`.
+- Native dialog restores focus to its invoking control.
+- Product table has a caption and column headers.
+- Responsive layout.
 
 ## Data limitations
 
-The server uses in-memory demonstration data. It resets on server restart. LocalStorage stores a browser-side copy for cache/fallback display; it is not a shared or permanent database.
-
-## Accessibility choices
-
-- Semantic landmarks (`header`, `nav`, `main`, `section`, `footer`).
-- Skip link to main content.
-- Form controls have visible labels.
-- Status updates use `role="status"` and `aria-live`.
-- Dialog uses native `<dialog>` and returns focus to the trigger after save/cancel.
-- Keyboard focus indicators are visible.
-- Table has a caption and column headers.
-- Layout adapts to narrow screens.
+The product collection is in memory and resets on restart/redeploy. LocalStorage is only a browser-specific cache. It is not durable database storage.
