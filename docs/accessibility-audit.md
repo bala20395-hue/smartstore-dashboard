@@ -117,6 +117,15 @@ The user's browser screenshot shows a visible keyboard focus indicator on the **
 - Evidence filename: `task02-keyboard-product-delete-focus.png`
 - Safety note: the Delete action was focused but not activated; no product was intentionally deleted during this check.
 
+
+### Keyboard navigation — category filter
+
+The user's deployed-site screenshot shows the Category select control with a visible focus indicator and the `Testing` category selected. The product table is filtered to the matching “DB Persistence Test” record.
+
+- Result: category selection and filtering worked in the keyboard test sequence.
+- Evidence filename: `task02-keyboard-category-filter.png`
+- Remaining checks: keyboard navigation through the Sort by select, search field, and all other controls; verify the complete page tab order and focus visibility.
+
 ## Five verified findings
 
 Do not invent findings. Each item must include real evidence and a practical remediation.
