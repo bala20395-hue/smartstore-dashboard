@@ -10,7 +10,7 @@
 
 | Task | Expected evidence | Current status |
 |---|---|---|
-| 02 — Accessibility and architecture audit | Lighthouse screenshot/score, keyboard notes, five evidence-backed issues with severity/remediation, architecture tree | Desktop Lighthouse retest screenshot from 16 November 2026 shows Accessibility 100. Save it as `task02-lighthouse-desktop-after-fix.png`; keyboard-only manual checks and five evidence-backed findings are still required. |
+| 02 — Accessibility and architecture audit | Lighthouse screenshot/score, keyboard notes, five evidence-backed issues with severity/remediation, architecture tree | Desktop and mobile Lighthouse screenshots from 16 November 2026 both show Accessibility 100 (mobile emulation 390 × 844). Save them as `task02-lighthouse-desktop-after-fix.png` and `task02-lighthouse-mobile.png`; remaining keyboard/manual checks and five evidence-backed findings are still required. |
 | 03 — Semantic HTML5 and accessible components | W3C validator result, semantic layout/form/table screenshots | Semantic markup and accessible form associations are implemented. Capture the validator result. |
 | 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | Responsive CSS is implemented. Capture viewport evidence. |
 | 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence | Features and validation tests are present. Capture genuine deployed test evidence. |
