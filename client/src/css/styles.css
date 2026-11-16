@@ -282,6 +282,13 @@ h2 {
 }
 
 .field,
+.form-fields {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
 .form-field {
   display: flex;
   flex-direction: column;
@@ -484,6 +491,17 @@ tbody tr:hover {
   }
 }
 
+/* Explicit course review viewport bands: 320px, 768px, 1024px, and 1440px. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .page-shell { width: 92%; }
+  .stats-grid { gap: .9rem; }
+}
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .page-shell { width: min(1180px, 90%); }
+}
+@media (min-width: 1440px) {
+  .page-shell { width: min(1280px, 88%); }
+}
 @media (max-width: 520px) {
   .topbar {
     flex-wrap: wrap;
