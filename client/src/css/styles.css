@@ -315,7 +315,7 @@ select {
 
 input::placeholder {
   color: var(--muted);
-  opacity: .8;
+  opacity: 1;
 }
 
 .status-message {
