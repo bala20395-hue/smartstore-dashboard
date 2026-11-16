@@ -129,6 +129,20 @@ Evidence filenames:
 - `task05-api-put-update.png`
 - `task05-api-delete.png`
 
+
+## REST API negative validation tests — successful live run (17 November 2026)
+
+The user's PowerShell screenshot shows two negative tests against the deployed API:
+
+1. **POST invalid product** with an empty product name returned HTTP **400** and the script printed `PASSED: Invalid product rejected`.
+2. **PUT non-existent product ID** returned HTTP **404** and the script printed `PASSED: Missing product correctly rejected`.
+
+The terminal shows `NEGATIVE TESTING COMPLETED`.
+
+Result: **the API rejected the observed invalid create request and missing-record update request with the expected HTTP status codes**.
+
+Evidence filename: `task05-api-negative-tests.png`.
+
 ## Recommended screenshot names
 
 - `task02-lighthouse-accessibility.png` (initial score 96)
