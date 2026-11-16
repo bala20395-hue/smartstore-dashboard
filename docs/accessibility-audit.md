@@ -96,7 +96,7 @@ Do not invent findings. Each item must include real evidence and a practical rem
 
 - Product dialog focus returns to the control that opened it, including the relevant Edit button.
 - Product form inputs reference inline errors and update `aria-invalid`.
-- Product records remain in server memory only and reset after server restart/redeploy. A database is required for durable shared data.
+- Product records use PostgreSQL when `DATABASE_URL` is configured. If the variable is absent, the application deliberately falls back to in-memory demonstration data. LocalStorage is only a browser cache, not shared durable storage.
 
 Re-run browser keyboard testing after the deployed changes are live.
 
