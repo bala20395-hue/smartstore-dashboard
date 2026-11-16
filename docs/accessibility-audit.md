@@ -48,6 +48,29 @@ Request flow: browser UI → `client/src/js/api.js` → Express `/api/products` 
 - Evidence filename:
 - Notes:
 
+
+## Lighthouse result — initial desktop run (16 November 2026)
+
+The user's captured Lighthouse report showed:
+- Accessibility: **96**
+- Best Practices: **100**
+- SEO: **91**
+- Contrast audit: **Background and foreground colors do not have a sufficient contrast ratio**
+- Failing elements listed by Lighthouse: `p.muted`, `body`, and `p`
+
+### Verified source-level cause and remediation
+
+The light-theme CSS originally used:
+- Muted foreground: `#687386`
+- Page background: `#f4f6fa`
+- Calculated contrast ratio for this pair: **4.43:1**, below the WCAG AA 4.5:1 threshold for normal text.
+
+The light-theme muted token was changed to `#626d7d`. Its calculated contrast ratio against `#f4f6fa` is approximately **4.85:1**. The dark-theme muted token was not changed.
+
+- Remediation commit: https://github.com/bala20395-hue/smartstore-dashboard/commit/6987860437e9c1b2c2c0a8572331ab6aec639732
+- Initial Lighthouse screenshot: retain as `task02-lighthouse-desktop-before-fix.png`.
+- Retest required: rerun Lighthouse after the new Render deployment is live and record the new score and any remaining failing elements. The original report also listed generic `body` and `p` nodes; confirm whether they remain in the retest rather than assuming this one token explains every item.
+
 ## Five verified findings
 
 Do not invent findings. Each item must include real evidence and a practical remediation.
