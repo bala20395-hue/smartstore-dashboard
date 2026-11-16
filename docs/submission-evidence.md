@@ -68,6 +68,21 @@ The browser preview is physically clipped by the available DevTools area; only t
 
 Evidence filename: `task04-1440px.png`.
 
+
+### Responsive viewport check — 1440px desktop product-management view
+
+The user's Chrome responsive-emulation screenshot shows **1440 × 900 CSS pixels** with Fit to window enabled. The full Product Management area is visible, including:
+- Add Product button
+- Search products input
+- Category and Sort controls
+- All six product records
+- Edit and Delete actions for each record
+- Result count and footer
+
+The controls and product list are visually contained within the page at this desktop viewport. A programmatic document-width check has not yet been captured, so do not claim a measured no-overflow result from this screenshot alone.
+
+Evidence filename: `task04-1440px-product-management.png`.
+
 ## Recommended screenshot names
 
 - `task02-lighthouse-accessibility.png` (initial score 96)
