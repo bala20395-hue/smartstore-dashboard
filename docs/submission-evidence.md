@@ -56,6 +56,18 @@ The screenshot captures only the upper portion of the page, so the full product-
 
 Evidence filename: `task04-1024px.png`.
 
+
+## Responsive viewport check — 1440px desktop layout (partial visual check)
+
+The user's Chrome responsive-emulation screenshot shows the viewport toolbar set to **1440 × 900 CSS pixels**. In the visible preview:
+- SmartStore navigation remains horizontal.
+- The dashboard summary cards appear in a multi-column layout.
+- The central page container is centered within the desktop viewport.
+
+The browser preview is physically clipped by the available DevTools area; only the first two summary cards are visible in this capture. Use Fit to window or hide DevTools and capture the full width before confirming the entire desktop layout and checking horizontal overflow.
+
+Evidence filename: `task04-1440px.png`.
+
 ## Recommended screenshot names
 
 - `task02-lighthouse-accessibility.png` (initial score 96)
