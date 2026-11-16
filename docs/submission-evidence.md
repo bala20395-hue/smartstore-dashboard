@@ -23,6 +23,15 @@ The user's Chrome device-emulation screenshot shows the viewport set to **320 ×
 
 Evidence filename: `task04-320px.png`.
 
+
+## Responsive viewport check — 320px product list
+
+The user's Chrome responsive preview screenshot shows the product table adapting into stacked product cards at a 320 CSS-pixel viewport width. The visible Desk Lamp card displays Product, Category, Price, Stock, and Actions, with both Edit and Delete controls visible inside the card.
+
+This is visual evidence that the product list adapts to a narrow layout. It does not by itself prove that the entire document has no horizontal overflow; the document width check should still be completed separately.
+
+Evidence filename: `task04-320px-product-cards.png`.
+
 ## Recommended screenshot names
 
 - `task02-lighthouse-accessibility.png` (initial score 96)
