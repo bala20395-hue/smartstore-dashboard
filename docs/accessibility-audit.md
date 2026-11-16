@@ -136,6 +136,19 @@ The user's browser screenshot shows the **Sort by** select control with a visibl
 - Remaining check: select `All categories`, then choose `Price (low to high)` using the keyboard and confirm the list is ordered by increasing price.
 - Evidence filename: `task02-keyboard-sort-focus.png`.
 
+
+### Keyboard navigation — category and price sorting
+
+The user's deployed-site screenshot shows:
+- Category filter set to `All categories`.
+- Sort control focused (visible focus indicator) and set to `Price (low to high)`.
+- All six products displayed in ascending price order: DB Persistence Test (₹123), Notebook Set (₹299), Wireless Mouse (₹799), Desk Lamp (₹1,199), USB-C Hub (₹1,499), Mechanical Keyboard (₹2,499).
+
+Result: **keyboard selection of the price sort and correct ascending product order observed**.
+
+- Evidence filename: `task02-keyboard-price-sort.png`
+- Remaining check: search field keyboard operation, full tab sequence review, responsive checks, and any other manual checks required by the rubric.
+
 ## Five verified findings
 
 Do not invent findings. Each item must include real evidence and a practical remediation.
