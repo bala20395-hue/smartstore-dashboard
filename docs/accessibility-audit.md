@@ -84,6 +84,19 @@ Retest evidence filename: `task02-lighthouse-desktop-after-fix.png`.
 Manual keyboard, focus-order, visible-focus, dialog, accessible-name, and screen-reader-related checks remain to be performed and documented separately. Do not mark them passed based on the Lighthouse score alone.
 
 
+
+## Lighthouse retest — mobile viewport (16 November 2026)
+
+The user's captured Chrome Lighthouse screenshot shows:
+- Emulated viewport: **390 × 844 CSS pixels**
+- Lighthouse device mode: **Mobile**
+- Accessibility score: **100**
+- Lighthouse lists 10 additional manual review items. These are not automated failures and must be checked separately.
+
+Evidence filename: `task02-lighthouse-mobile.png`.
+
+The screenshot demonstrates a successful automated Accessibility audit at the 390 × 844 mobile emulation size. It does not independently establish that every responsive breakpoint (320px, 768px, 1024px, 1440px), horizontal overflow behavior, or every manual accessibility check has passed.
+
 ## Keyboard-only test — product dialog focus flow
 
 Observed manually on the deployed SmartStore interface in Chrome on 16 November 2026:
