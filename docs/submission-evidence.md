@@ -44,6 +44,18 @@ This is consistent with the tablet CSS layout. The screenshot is a partial viewp
 
 Evidence filename: `task04-768px.png`.
 
+
+## Responsive viewport check — 1024px layout (partial visual check)
+
+The user's Chrome responsive-emulation screenshot shows the viewport toolbar set to **1024 × 768 CSS pixels**. In the visible portion:
+- The navigation remains on one horizontal row.
+- Dashboard summary cards appear side by side.
+- The dashboard content remains within the preview width.
+
+The screenshot captures only the upper portion of the page, so the full product-management area and the complete 1024px page-width/overflow behavior still need to be checked by scrolling through the page.
+
+Evidence filename: `task04-1024px.png`.
+
 ## Recommended screenshot names
 
 - `task02-lighthouse-accessibility.png` (initial score 96)
