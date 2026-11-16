@@ -149,6 +149,15 @@ Result: **keyboard selection of the price sort and correct ascending product ord
 - Evidence filename: `task02-keyboard-price-sort.png`
 - Remaining check: search field keyboard operation, full tab sequence review, responsive checks, and any other manual checks required by the rubric.
 
+
+### Keyboard navigation — search field
+
+The user's deployed-site screenshot shows the Search products input with a visible focus indicator and the query `Mouse` entered. The results table displays only `Wireless Mouse` and the result count reads `Showing 1 of 6 products`.
+
+Result: **search input was keyboard-focusable, accepted text, and filtered the product list as expected**.
+
+- Evidence filename: `task02-keyboard-search-filter.png`
+
 ## Five verified findings
 
 Do not invent findings. Each item must include real evidence and a practical remediation.
