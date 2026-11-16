@@ -109,6 +109,26 @@ Source remediation committed:
 
 Retest required after Render deploys these commits: run the W3C validator again and record the actual error and warning counts. The initial screenshot alone is not evidence of zero errors or a clean final validation.
 
+
+## REST API CRUD verification — successful live run (17 November 2026)
+
+The user's PowerShell screenshots from the deployed SmartStore API show the following sequence using one temporary API test product:
+
+1. **GET** `/api/products`: returned the existing product list (six records were visible in the terminal output).
+2. **POST** `/api/products`: created `API Test Product` in category `Testing`, price `499`, stock `10`, with ID `101a3b38-8038-47fc-956c-0af0a1b49274`.
+3. **PUT** `/api/products/101a3b38-8038-47fc-956c-0af0a1b49274`: updated the same record to `API Test Product Updated`, price `599`, stock `12`.
+4. **DELETE** the same ID: returned `Product deleted.`.
+
+The terminal's final green line shows `API TESTING COMPLETED`. The test product was deleted; the screenshots do not indicate deletion of any existing catalogue product.
+
+Result: **GET, POST, PUT, and DELETE API operations completed successfully in the observed live run**.
+
+Evidence filenames:
+- `task05-api-get-products.png`
+- `task05-api-post-create.png`
+- `task05-api-put-update.png`
+- `task05-api-delete.png`
+
 ## Recommended screenshot names
 
 - `task02-lighthouse-accessibility.png` (initial score 96)
