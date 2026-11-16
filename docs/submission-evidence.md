@@ -16,6 +16,13 @@
 | 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence | Features and validation tests are present. Capture genuine deployed test evidence. |
 | 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, final feature checks, persistent state | GitHub and Render deployment are available. PostgreSQL adapter is implemented; set Render `DATABASE_URL` and test data across restart before marking persistence complete. |
 
+
+## Responsive viewport check — initial 320px pass (16 November 2026)
+
+The user's Chrome device-emulation screenshot shows the viewport set to **320 × 700 CSS pixels**. The dashboard summary cards appear stacked in a single column at this width, consistent with the mobile CSS layout. This visual screenshot alone does not prove the absence of document-level horizontal overflow; record that result only after checking `document.documentElement.scrollWidth` against `clientWidth`.
+
+Evidence filename: `task04-320px.png`.
+
 ## Recommended screenshot names
 
 - `task02-lighthouse-accessibility.png` (initial score 96)
