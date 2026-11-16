@@ -32,6 +32,18 @@ This is visual evidence that the product list adapts to a narrow layout. It does
 
 Evidence filename: `task04-320px-product-cards.png`.
 
+
+## Responsive viewport check — 768px tablet layout
+
+The user's Chrome responsive-emulation screenshot shows the viewport width set to **768 CSS pixels**. In the visible Product Management section:
+- The Search products field spans the first full row.
+- Category and Sort by controls appear side-by-side.
+- The Add product button remains visible alongside the section heading.
+
+This is consistent with the tablet CSS layout. The screenshot is a partial viewport capture; continue scrolling through the product list and check for clipping/overflow before marking the full 768 × 1024 test complete.
+
+Evidence filename: `task04-768px.png`.
+
 ## Recommended screenshot names
 
 - `task02-lighthouse-accessibility.png` (initial score 96)
