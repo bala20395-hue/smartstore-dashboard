@@ -109,6 +109,14 @@ The user's follow-up browser screenshot shows a visible focus indicator on the *
 - Evidence filename: `task02-keyboard-product-edit-focus.png`
 - Remaining check: verify the Delete button immediately after it, and verify both Edit and Delete actions for a row using the keyboard. Also finish the remaining manual checks before declaring the full keyboard audit complete.
 
+
+### Keyboard navigation — product Delete action
+
+The user's browser screenshot shows a visible keyboard focus indicator on the **Delete** button for the “Mechanical Keyboard” row immediately after the Edit button in the tab sequence. This confirms that the Delete action is keyboard-focusable in the tested desktop browser.
+
+- Evidence filename: `task02-keyboard-product-delete-focus.png`
+- Safety note: the Delete action was focused but not activated; no product was intentionally deleted during this check.
+
 ## Five verified findings
 
 Do not invent findings. Each item must include real evidence and a practical remediation.
