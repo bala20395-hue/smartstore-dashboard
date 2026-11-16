@@ -56,10 +56,11 @@ function getVisibleProducts() {
   };
   return visible.sort(sorters[elements.sort.value] || sorters["name-asc"]);
 }
-function makeCell(value, className) {
+function makeCell(value, className, label) {
   const cell = document.createElement("td");
   cell.textContent = String(value);
   if (className) cell.className = className;
+  if (label) cell.dataset.label = label;
   return cell;
 }
 function renderProducts() {
@@ -74,13 +75,15 @@ function renderProducts() {
   } else {
     for (const product of visible) {
       const row = document.createElement("tr");
-      row.append(makeCell(product.name, "product-name"));
+      row.append(makeCell(product.name, "product-name", "Product"));
       const categoryCell = document.createElement("td");
       const tag = document.createElement("span");
       tag.className = "category-tag"; tag.textContent = product.category;
       categoryCell.append(tag);
-      row.append(categoryCell, makeCell(formatCurrency(product.price)), makeCell(product.stock));
+      categoryCell.dataset.label = "Category";
+      row.append(categoryCell, makeCell(formatCurrency(product.price), "", "Price"), makeCell(product.stock, "", "Stock"));
       const actionsCell = document.createElement("td");
+      actionsCell.dataset.label = "Actions";
       const actions = document.createElement("div"); actions.className = "actions";
       const editButton = document.createElement("button");
       editButton.type = "button"; editButton.className = "button button-secondary button-small";
