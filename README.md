@@ -1,38 +1,30 @@
 # SmartStore Dashboard
 
-A responsive, accessible product-management dashboard built with HTML5, CSS3, vanilla JavaScript, Node.js, and Express.
-
-This project is designed as one evolving capstone for the RABTECH Full Stack Web Development tasks.
+A responsive product-management dashboard built with HTML5, CSS3, vanilla JavaScript, Node.js, and Express. This is the RABTECH Full Stack Web Development capstone project.
 
 ## Features
 
-- Dashboard summary cards
-- Product listing from a REST API
-- Create, edit, and delete products
-- Search by product name
-- Filter by category
-- Sort by product name, price, or stock
-- Client-side LocalStorage cache
+- Dashboard summary cards and inventory table
+- REST API for listing, creating, editing, and deleting products
+- Search, category filtering, and sorting
+- LocalStorage browser cache and saved light/dark theme
 - Loading, empty, and error states
-- Accessible labels, semantic landmarks, keyboard-friendly dialog, and visible focus
-- Responsive desktop, tablet, and mobile layout
-- Light/dark theme toggle
-- Simple server-side validation
+- Semantic HTML landmarks, skip link, labelled form fields, table caption and headings
+- Accessible product dialog with focus restoration and inline validation associations
+- Responsive layouts using CSS Grid, Flexbox, design tokens, and media queries
+- Server-side validation and automated validation tests
 
-> The included product records are demonstration data. The server currently stores changes in memory, so restarting the server resets the demo data. LocalStorage keeps a browser-side cache, not a permanent database.
+> Demo-data limitation: the Express server currently stores product records in memory. Data resets when the server restarts or redeploys. LocalStorage is a browser-side cache, not durable shared storage. Add a database if persistent shared data is required by the assessment.
 
 ## Requirements
 
-- Node.js 18 or newer
+- Node.js 18+
 - npm
 - VS Code (recommended)
 
 ## Run locally
 
-1. Extract the ZIP.
-2. Open the extracted `smartstore-dashboard-complete` folder in VS Code.
-3. Open the VS Code terminal.
-4. Run:
+From the repository root:
 
 ```bash
 cd server
@@ -40,19 +32,23 @@ npm install
 npm run dev
 ```
 
-5. Open `http://localhost:3000` in your browser.
+Open http://localhost:3000.
 
-Do not open `client/index.html` directly for this full version. Open the app through the Express server so the API and frontend use the same origin.
+Run automated validation tests from `server/`:
+
+```bash
+npm test
+```
 
 ## API endpoints
 
-| Method | Endpoint | Purpose |
+| Method | Endpoint | Description |
 |---|---|---|
 | GET | `/health` | Health check |
 | GET | `/api/products` | List products |
-| POST | `/api/products` | Create a product |
-| PUT | `/api/products/:id` | Update a product |
-| DELETE | `/api/products/:id` | Delete a product |
+| POST | `/api/products` | Create product |
+| PUT | `/api/products/:id` | Update product |
+| DELETE | `/api/products/:id` | Delete product |
 
 ## Repository structure
 
@@ -69,29 +65,32 @@ smartstore-dashboard/
 │   ├── package.json
 │   └── src/
 │       ├── server.js
-│       └── routes/products.js
+│       └── routes/
+│           ├── products.js
+│           └── productValidation.js
 ├── docs/
 │   ├── accessibility-audit.md
-│   └── architecture.md
-├── tests/
-│   └── validation.test.js
-├── .gitignore
-└── README.md
+│   ├── architecture.md
+│   ├── deployment.md
+│   ├── submission-evidence.md
+│   └── testing-guide.md
+└── tests/validation.test.js
 ```
 
-## Accessibility audit evidence
+## Deployment
 
-See `docs/accessibility-audit.md`. Run Lighthouse and keyboard testing against the actual public website you choose. Record only findings you verify and attach genuine screenshots. Do not present the starter worksheet as a completed audit.
+The Render service uses:
+- Build command: `cd server && npm install`
+- Start command: `cd server && npm start`
+- Health check: `/health`
+- Root directory: blank (repository root)
 
-## GitHub
+Live app: https://smartstore-dashboard-i1t1.onrender.com
 
-Create a public repository named `smartstore-dashboard`, then run these commands from the project root:
+## Accessibility evidence
 
-```bash
-git init
-git add .
-git commit -m "Build SmartStore dashboard"
-git branch -M main
-git remote add origin YOUR_GITHUB_REPOSITORY_URL
-git push -u origin main
-```
+The audit worksheet is not a completed Lighthouse audit. Run Lighthouse and a keyboard-only pass on the selected public website, save genuine screenshots, and enter only findings actually observed. See `docs/submission-evidence.md` and `docs/testing-guide.md`.
+
+## Repository
+
+https://github.com/bala20395-hue/smartstore-dashboard
