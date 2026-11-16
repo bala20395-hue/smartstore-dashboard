@@ -83,6 +83,19 @@ The controls and product list are visually contained within the page at this des
 
 Evidence filename: `task04-1440px-product-management.png`.
 
+
+## W3C HTML validation — initial result and source remediation (17 November 2026)
+
+The user's W3C Nu HTML Checker screenshot shows three **warnings** and no error messages visible in the supplied capture. All three warnings report: “Article lacks heading”, pointing to the three dashboard summary `article.stat-card` elements (original source lines 27–29).
+
+Source remediation committed:
+- Each statistic article now has a visible semantic `h2.stat-label` heading: Total products, Total stock, Catalog value.
+- CSS preserves the existing compact statistic-label appearance for the new headings.
+- HTML commit: https://github.com/bala20395-hue/smartstore-dashboard/commit/89d892d01301c1c76ca1843a84769622bbdc5576
+- CSS commit: https://github.com/bala20395-hue/smartstore-dashboard/commit/735810c8268c3a802684abf34032845b02788354
+
+Retest required after Render deploys these commits: run the W3C validator again and record the actual error and warning counts. The initial screenshot alone is not evidence of zero errors or a clean final validation.
+
 ## Recommended screenshot names
 
 - `task02-lighthouse-accessibility.png` (initial score 96)
