@@ -83,6 +83,24 @@ Retest evidence filename: `task02-lighthouse-desktop-after-fix.png`.
 
 Manual keyboard, focus-order, visible-focus, dialog, accessible-name, and screen-reader-related checks remain to be performed and documented separately. Do not mark them passed based on the Lighthouse score alone.
 
+
+## Keyboard-only test — product dialog focus flow
+
+Observed manually on the deployed SmartStore interface in Chrome on 16 November 2026:
+
+- The Add product button displayed a visible keyboard focus indicator.
+- Pressing Enter opened the product dialog.
+- Initial focus moved to the Product name field.
+- Pressing Shift+Tab from the first field moved focus to the dialog's Close button, which displayed a visible focus indicator.
+- Pressing Enter on Close dismissed the dialog.
+- Focus returned to the Add product button after dismissal.
+
+Result: **the tested product-dialog open/close focus flow passed**. This does not by itself verify every keyboard check (search, selects, edit/delete actions, logical tab order throughout the whole page, screen-reader announcements, and focus behavior for all controls). Continue those tests separately.
+
+Evidence filenames:
+- `task02-keyboard-dialog-open.png`
+- `task02-keyboard-dialog-close-focus-return.png`
+
 ## Five verified findings
 
 Do not invent findings. Each item must include real evidence and a practical remediation.
