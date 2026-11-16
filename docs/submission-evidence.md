@@ -17,6 +17,19 @@
 | 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, final feature checks, persistent state | GitHub and Render deployment are available. PostgreSQL adapter is implemented; set Render `DATABASE_URL` and test data across restart before marking persistence complete. |
 
 
+
+## W3C HTML validation — successful retest (17 November 2026)
+
+The user's W3C Nu HTML Checker screenshot for `https://smartstore-dashboard-i1t1.onrender.com` shows the green result:
+
+**“Document checking completed. No errors or warnings to show.”**
+
+This is the post-remediation retest after adding semantic `h2` headings to the three dashboard statistic cards.
+
+Result: **W3C Nu HTML validation passed with zero reported errors and zero reported warnings**.
+
+Evidence filename: `task03-html-validator-zero-errors.png`.
+
 ## Responsive viewport check — initial 320px pass (16 November 2026)
 
 The user's Chrome device-emulation screenshot shows the viewport set to **320 × 700 CSS pixels**. The dashboard summary cards appear stacked in a single column at this width, consistent with the mobile CSS layout. This visual screenshot alone does not prove the absence of document-level horizontal overflow; record that result only after checking `document.documentElement.scrollWidth` against `clientWidth`.
