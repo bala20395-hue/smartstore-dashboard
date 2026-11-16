@@ -126,6 +126,16 @@ The user's deployed-site screenshot shows the Category select control with a vis
 - Evidence filename: `task02-keyboard-category-filter.png`
 - Remaining checks: keyboard navigation through the Sort by select, search field, and all other controls; verify the complete page tab order and focus visibility.
 
+
+### Keyboard navigation — sort select
+
+The user's browser screenshot shows the **Sort by** select control with a visible focus indicator. This confirms that the control is reachable by keyboard in the tested desktop browser.
+
+- Current selection shown in the screenshot: `Stock (high to low)`.
+- This screenshot does not yet verify that the requested `Price (low to high)` sort was selected or that ordering was correct, because the Category filter is set to `Testing` and only one product is visible.
+- Remaining check: select `All categories`, then choose `Price (low to high)` using the keyboard and confirm the list is ordered by increasing price.
+- Evidence filename: `task02-keyboard-sort-focus.png`.
+
 ## Five verified findings
 
 Do not invent findings. Each item must include real evidence and a practical remediation.
