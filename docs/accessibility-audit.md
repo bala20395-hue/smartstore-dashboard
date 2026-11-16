@@ -71,6 +71,18 @@ The light-theme muted token was changed to `#626d7d`. Its calculated contrast ra
 - Initial Lighthouse screenshot: retain as `task02-lighthouse-desktop-before-fix.png`.
 - Retest required: rerun Lighthouse after the new Render deployment is live and record the new score and any remaining failing elements. The original report also listed generic `body` and `p` nodes; confirm whether they remain in the retest rather than assuming this one token explains every item.
 
+
+## Lighthouse retest — desktop after contrast remediation (16 November 2026)
+
+The user's follow-up Lighthouse screenshot shows:
+- Accessibility: **100**
+- The earlier insufficient text contrast warning is no longer displayed in this report.
+- Lighthouse still lists **10 additional items to manually check**. These are manual review prompts, not automated failures and not proof that the checks passed.
+
+Retest evidence filename: `task02-lighthouse-desktop-after-fix.png`.
+
+Manual keyboard, focus-order, visible-focus, dialog, accessible-name, and screen-reader-related checks remain to be performed and documented separately. Do not mark them passed based on the Lighthouse score alone.
+
 ## Five verified findings
 
 Do not invent findings. Each item must include real evidence and a practical remediation.
