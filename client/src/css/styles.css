@@ -282,17 +282,17 @@ h2 {
 }
 
 .field,
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
 .form-fields {
   min-width: 0;
   margin: 0;
   padding: 0;
   border: 0;
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: .35rem;
 }
 
 .field label,
