@@ -10,7 +10,6 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
-
   <header class="topbar">
     <a class="brand" href="/" aria-label="SmartStore home">SmartStore</a>
     <nav class="main-nav" aria-label="Main navigation">
@@ -19,136 +18,41 @@
     </nav>
     <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch to dark theme">◐</button>
   </header>
-
   <main id="main-content" class="page-shell">
     <section id="overview" class="page-heading" aria-labelledby="page-title">
-      <div>
-        <p class="eyebrow">STORE MANAGEMENT</p>
-        <h1 id="page-title">Dashboard overview</h1>
-        <p class="muted">Welcome to your SmartStore management system.</p>
-      </div>
+      <div><p class="eyebrow">STORE MANAGEMENT</p><h1 id="page-title">Dashboard overview</h1><p class="muted">Welcome to your SmartStore management system.</p></div>
       <span class="status-pill"><span class="status-dot"></span> Demo workspace</span>
     </section>
-
     <section class="stats-grid" aria-label="Store summary">
-      <article class="stat-card">
-        <p class="stat-label">Total products</p>
-        <p class="stat-value" id="total-products">—</p>
-        <p class="stat-footnote">Items in your catalog</p>
-      </article>
-      <article class="stat-card">
-        <p class="stat-label">Total stock</p>
-        <p class="stat-value" id="total-stock">—</p>
-        <p class="stat-footnote">Units available</p>
-      </article>
-      <article class="stat-card">
-        <p class="stat-label">Catalog value</p>
-        <p class="stat-value" id="catalog-value">—</p>
-        <p class="stat-footnote">Price × stock (demo estimate)</p>
-      </article>
+      <article class="stat-card"><p class="stat-label">Total products</p><p class="stat-value" id="total-products">—</p><p class="stat-footnote">Items in your catalog</p></article>
+      <article class="stat-card"><p class="stat-label">Total stock</p><p class="stat-value" id="total-stock">—</p><p class="stat-footnote">Units available</p></article>
+      <article class="stat-card"><p class="stat-label">Catalog value</p><p class="stat-value" id="catalog-value">—</p><p class="stat-footnote">Price × stock (demo estimate)</p></article>
     </section>
-
     <section id="products" class="panel" aria-labelledby="products-title">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">INVENTORY</p>
-          <h2 id="products-title">Product management</h2>
-          <p class="muted">View, search, sort, and manage your products.</p>
-        </div>
-        <button class="button button-primary" id="add-product-button" type="button">＋ Add product</button>
-      </div>
-
+      <div class="section-heading"><div><p class="eyebrow">INVENTORY</p><h2 id="products-title">Product management</h2><p class="muted">View, search, sort, and manage your products.</p></div><button class="button button-primary" id="add-product-button" type="button">＋ Add product</button></div>
       <div class="toolbar">
-        <div class="field search-field">
-          <label for="search-input">Search products</label>
-          <input id="search-input" type="search" placeholder="Search by product name…" autocomplete="off">
-        </div>
-        <div class="field">
-          <label for="category-filter">Category</label>
-          <select id="category-filter">
-            <option value="all">All categories</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="sort-select">Sort by</label>
-          <select id="sort-select">
-            <option value="name-asc">Name (A–Z)</option>
-            <option value="price-asc">Price (low to high)</option>
-            <option value="price-desc">Price (high to low)</option>
-            <option value="stock-desc">Stock (high to low)</option>
-          </select>
-        </div>
+        <div class="field search-field"><label for="search-input">Search products</label><input id="search-input" type="search" placeholder="Search by product name…" autocomplete="off"></div>
+        <div class="field"><label for="category-filter">Category</label><select id="category-filter"><option value="all">All categories</option></select></div>
+        <div class="field"><label for="sort-select">Sort by</label><select id="sort-select"><option value="name-asc">Name (A–Z)</option><option value="price-asc">Price (low to high)</option><option value="price-desc">Price (high to low)</option><option value="stock-desc">Stock (high to low)</option></select></div>
       </div>
-
       <p id="status-message" class="status-message" role="status" aria-live="polite">Loading products…</p>
-
-      <div class="table-wrap">
-        <table>
-          <caption class="sr-only">Product inventory with category, price, stock, and actions</caption>
-          <thead>
-            <tr>
-              <th scope="col">Product</th>
-              <th scope="col">Category</th>
-              <th scope="col">Price</th>
-              <th scope="col">Stock</th>
-              <th scope="col"><span class="sr-only">Actions</span></th>
-            </tr>
-          </thead>
-          <tbody id="product-rows"></tbody>
-        </table>
-      </div>
+      <div class="table-wrap"><table><caption class="sr-only">Product inventory with category, price, stock, and actions</caption><thead><tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col">Price</th><th scope="col">Stock</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody id="product-rows"></tbody></table></div>
       <p class="table-footer" id="result-count"></p>
     </section>
   </main>
-
-  <footer class="footer">
-    <p>SmartStore Dashboard <span aria-hidden="true">·</span> Full Stack learning project</p>
-  </footer>
-
+  <footer class="footer"><p>SmartStore Dashboard <span aria-hidden="true">·</span> Full Stack learning project</p></footer>
   <dialog id="product-dialog" class="product-dialog" aria-labelledby="dialog-title">
     <form id="product-form" novalidate>
-      <div class="dialog-heading">
-        <div>
-          <p class="eyebrow">PRODUCT DETAILS</p>
-          <h2 id="dialog-title">Add product</h2>
-        </div>
-        <button class="icon-button" id="close-dialog-button" type="button" aria-label="Close dialog">×</button>
-      </div>
-
+      <div class="dialog-heading"><div><p class="eyebrow">PRODUCT DETAILS</p><h2 id="dialog-title">Add product</h2></div><button class="icon-button" id="close-dialog-button" type="button" aria-label="Close dialog">×</button></div>
       <input type="hidden" id="product-id">
-      <div class="form-field">
-        <label for="product-name">Product name <span aria-hidden="true">*</span></label>
-        <input id="product-name" name="name" required maxlength="80" autocomplete="off">
-        <small class="field-error" id="name-error"></small>
-      </div>
-      <div class="form-field">
-        <label for="product-category">Category <span aria-hidden="true">*</span></label>
-        <input id="product-category" name="category" required maxlength="50" list="category-options" autocomplete="off">
-        <datalist id="category-options">
-          <option value="Accessories"></option>
-          <option value="Electronics"></option>
-          <option value="Stationery"></option>
-          <option value="Home"></option>
-        </datalist>
-        <small class="field-error" id="category-error"></small>
-      </div>
+      <div class="form-field"><label for="product-name">Product name <span aria-hidden="true">*</span></label><input id="product-name" name="name" required maxlength="80" autocomplete="off" aria-describedby="name-error" aria-invalid="false"><small class="field-error" id="name-error" aria-live="polite"></small></div>
+      <div class="form-field"><label for="product-category">Category <span aria-hidden="true">*</span></label><input id="product-category" name="category" required maxlength="50" list="category-options" autocomplete="off" aria-describedby="category-error" aria-invalid="false"><datalist id="category-options"><option value="Accessories"></option><option value="Electronics"></option><option value="Stationery"></option><option value="Home"></option></datalist><small class="field-error" id="category-error" aria-live="polite"></small></div>
       <div class="form-row">
-        <div class="form-field">
-          <label for="product-price">Price (₹) <span aria-hidden="true">*</span></label>
-          <input id="product-price" name="price" type="number" min="0.01" step="0.01" required>
-          <small class="field-error" id="price-error"></small>
-        </div>
-        <div class="form-field">
-          <label for="product-stock">Stock <span aria-hidden="true">*</span></label>
-          <input id="product-stock" name="stock" type="number" min="0" step="1" required>
-          <small class="field-error" id="stock-error"></small>
-        </div>
+        <div class="form-field"><label for="product-price">Price (₹) <span aria-hidden="true">*</span></label><input id="product-price" name="price" type="number" min="0.01" step="0.01" required aria-describedby="price-error" aria-invalid="false"><small class="field-error" id="price-error" aria-live="polite"></small></div>
+        <div class="form-field"><label for="product-stock">Stock <span aria-hidden="true">*</span></label><input id="product-stock" name="stock" type="number" min="0" step="1" required aria-describedby="stock-error" aria-invalid="false"><small class="field-error" id="stock-error" aria-live="polite"></small></div>
       </div>
       <p class="form-error" id="form-error" role="alert"></p>
-      <div class="dialog-actions">
-        <button class="button button-secondary" id="cancel-button" type="button">Cancel</button>
-        <button class="button button-primary" type="submit">Save product</button>
-      </div>
+      <div class="dialog-actions"><button class="button button-secondary" id="cancel-button" type="button">Cancel</button><button class="button button-primary" type="submit">Save product</button></div>
     </form>
   </dialog>
 </body>
