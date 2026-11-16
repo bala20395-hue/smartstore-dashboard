@@ -2,6 +2,7 @@ import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import productsRouter from "./routes/products.js";
+import { initializeDatabase } from "./db.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,14 @@ app.use((error, _req, res, _next) => {
   res.status(500).json({ error: "Something went wrong on the server." });
 });
 
-app.listen(PORT, () => {
-  console.log(`SmartStore is running at http://localhost:${PORT}`);
+async function startServer() {
+  await initializeDatabase();
+  app.listen(PORT, () => {
+    console.log(`SmartStore is running on port ${PORT}`);
+  });
+}
+
+startServer().catch((error) => {
+  console.error("SmartStore could not start:", error);
+  process.exit(1);
 });
