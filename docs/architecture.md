@@ -7,9 +7,9 @@ SmartStore is a product-management dashboard demonstrating frontend, backend, ac
 ## System boundaries
 
 - `client/`: browser interface, semantic markup, CSS, interactions, API client, and LocalStorage cache.
-- `server/`: Express HTTP server, REST routes, request validation, and demo records.
+- `server/`: Express HTTP server, REST routes, request validation, and persistence adapter.
 - `docs/`: audit, architecture, deployment, and evidence documentation.
-- `tests/`: automated validation tests.
+- `tests/`: automated product-validation tests.
 
 ## Product listing flow
 
@@ -19,13 +19,15 @@ Browser page
   -> client/src/js/api.js
   -> GET /api/products
   -> server/src/routes/products.js
+  -> PostgreSQL (when DATABASE_URL is configured)
+     OR in-memory demo data (fallback mode)
   -> JSON product array
   -> accessible product table
 ```
 
 ## Add / edit / delete flow
 
-The browser validates fields and sends JSON to Express. The server validates the payload in `productValidation.js`, updates its in-memory collection, and returns JSON. The browser refreshes the table and LocalStorage cache.
+The browser validates required fields and sends JSON to Express. The server validates the payload in `productValidation.js`; if PostgreSQL is configured, parameterized SQL statements persist the records in the `products` table. Otherwise, the in-memory demo collection is used. The browser refreshes the table and LocalStorage cache.
 
 ## System diagram
 
@@ -46,7 +48,12 @@ The browser validates fields and sends JSON to Express. The server validates the
              |
              v
 +--------------------------+
-| Validation + demo data   |
+| Validation layer         |
++------------+-------------+
+             |
+             v
++--------------------------+
+| PostgreSQL / demo memory |
 +--------------------------+
 ```
 
@@ -55,9 +62,10 @@ The browser validates fields and sends JSON to Express. The server validates the
 1. Install Node.js 18+.
 2. Open a terminal in `server/`.
 3. Run `npm install`.
-4. Run `npm run dev`.
-5. Visit `http://localhost:3000`.
-6. Run automated tests with `npm test` from `server/`.
+4. Optionally configure `DATABASE_URL` in a private `.env` file using `.env.example`.
+5. Run `npm run dev`.
+6. Visit `http://localhost:3000`.
+7. Run automated tests with `npm test` from `server/`.
 
 ## Accessibility implementation
 
@@ -71,6 +79,8 @@ The browser validates fields and sends JSON to Express. The server validates the
 - Product table has a caption and column headers.
 - Responsive layout.
 
-## Data limitations
+## Data modes
 
-The product collection is in memory and resets on restart/redeploy. LocalStorage is only a browser-specific cache. It is not durable database storage.
+- PostgreSQL mode: enabled when `DATABASE_URL` is present; product records persist across server restarts.
+- Demo mode: used when `DATABASE_URL` is absent; data is held in memory and resets on server restart.
+- LocalStorage: browser-only cache and theme preference; not a shared database.
