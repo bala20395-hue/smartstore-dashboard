@@ -14,7 +14,7 @@ A responsive product-management dashboard built with HTML5, CSS3, vanilla JavaSc
 - Responsive layouts using CSS Grid, Flexbox, design tokens, and media queries
 - Server-side validation and automated validation tests
 
-> Demo-data limitation: the Express server currently stores product records in memory. Data resets when the server restarts or redeploys. LocalStorage is a browser-side cache, not durable shared storage. Add a database if persistent shared data is required by the assessment.
+> Demo-data limitation: the Express server currently stores product records in memory. Data resets when the server restarts or redeploys. LocalStorage is a browser-side cache, not durable shared storage. Add a database if persistent shared storage is required by the assessment.
 
 ## Requirements
 
@@ -79,10 +79,10 @@ smartstore-dashboard/
 
 ## Deployment
 
-The Render service uses:
+Render settings:
 - Build command: `cd server && npm install`
 - Start command: `cd server && npm start`
-- Health check: `/health`
+- Health check path: `/health`
 - Root directory: blank (repository root)
 
 Live app: https://smartstore-dashboard-i1t1.onrender.com
