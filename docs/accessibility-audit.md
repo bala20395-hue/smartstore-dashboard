@@ -101,6 +101,14 @@ Evidence filenames:
 - `task02-keyboard-dialog-open.png`
 - `task02-keyboard-dialog-close-focus-return.png`
 
+
+### Keyboard navigation — product action control
+
+The user's follow-up browser screenshot shows a visible focus indicator on the **Edit** button for the “Mechanical Keyboard” row after Tab navigation. This confirms the product-row Edit action can receive keyboard focus in the tested desktop browser.
+
+- Evidence filename: `task02-keyboard-product-edit-focus.png`
+- Remaining check: verify the Delete button immediately after it, and verify both Edit and Delete actions for a row using the keyboard. Also finish the remaining manual checks before declaring the full keyboard audit complete.
+
 ## Five verified findings
 
 Do not invent findings. Each item must include real evidence and a practical remediation.
