@@ -4,7 +4,7 @@ A responsive product-management dashboard built with HTML5, CSS3, vanilla JavaSc
 
 ## Features
 
-- Dashboard summary cards and inventory table
+- Dashboard summary cards and product inventory table
 - REST API for listing, creating, editing, and deleting products
 - Search, category filtering, and sorting
 - LocalStorage browser cache and saved light/dark theme
@@ -13,22 +13,32 @@ A responsive product-management dashboard built with HTML5, CSS3, vanilla JavaSc
 - Accessible product dialog with focus restoration and inline validation associations
 - Responsive layouts using CSS Grid, Flexbox, design tokens, and media queries
 - Server-side validation and automated validation tests
+- Optional PostgreSQL persistence through a `DATABASE_URL` environment variable
 
-> Demo-data limitation: the Express server currently stores product records in memory. Data resets when the server restarts or redeploys. LocalStorage is a browser-side cache, not durable shared storage. Add a database if persistent shared storage is required by the assessment.
+> Without `DATABASE_URL`, the app deliberately runs with in-memory demonstration data. With a PostgreSQL connection configured, product records persist in the database across server restarts. LocalStorage is a browser-side cache, not shared database storage.
 
 ## Requirements
 
 - Node.js 18+
 - npm
 - VS Code (recommended)
+- A PostgreSQL database for persistent deployed storage (Neon Free is one option)
 
 ## Run locally
 
 From the repository root:
 
-```bash
+```powershell
 cd server
 npm install
+Copy-Item .env.example .env
+```
+
+For persistent local testing, edit `server/.env` and put your real PostgreSQL connection string in `DATABASE_URL`. Keep this file private; it is ignored by Git.
+
+Then run:
+
+```powershell
 npm run dev
 ```
 
@@ -36,7 +46,7 @@ Open http://localhost:3000.
 
 Run automated validation tests from `server/`:
 
-```bash
+```powershell
 npm test
 ```
 
@@ -62,8 +72,10 @@ smartstore-dashboard/
 │           ├── api.js
 │           └── app.js
 ├── server/
+│   ├── .env.example
 │   ├── package.json
 │   └── src/
+│       ├── db.js
 │       ├── server.js
 │       └── routes/
 │           ├── products.js
@@ -76,6 +88,17 @@ smartstore-dashboard/
 │   └── testing-guide.md
 └── tests/validation.test.js
 ```
+
+## Database setup for Render
+
+1. Create a PostgreSQL project on Neon (or another PostgreSQL provider).
+2. Copy the pooled connection string. It should include TLS configuration such as `sslmode=require`.
+3. In Render, open the `smartstore-dashboard` web service → Environment.
+4. Add an environment variable named `DATABASE_URL` and paste the connection string as its value.
+5. Save changes and allow Render to redeploy.
+6. Open `/health` and the dashboard, then create a test product and verify it remains after a page refresh.
+
+Never commit a real `.env` file or database password. Keep credentials in Render's Environment settings.
 
 ## Deployment
 
