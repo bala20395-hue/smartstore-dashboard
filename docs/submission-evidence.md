@@ -234,7 +234,7 @@ Do not mark evidence captured until the actual screenshot or test output is save
 
 This section consolidates later retests and supersedes earlier preliminary notes above where they said that a check was still pending.
 
-- **Task 02:** Lighthouse scores are 100 desktop and mobile. Keyboard interactions are documented for the dialog, row actions, category filter, sort, and search. Five evidence-backed source findings are recorded in `docs/accessibility-audit.md`; two accessibility changes are committed. Verify the latest commits on the Render deployment, perform the screen-reader test, and complete the full tab-order review before calling the accessibility audit fully complete.
+- **Task 02:** Lighthouse scores are 100 desktop and mobile. Keyboard interactions are documented for the dialog, row actions, category filter, sort, and search. Windows Narrator announced the updated result count after the user searched for `Mouse` on the deployed app. Five evidence-backed source findings are recorded in `docs/accessibility-audit.md`; two accessibility changes are committed. A full end-to-end tab-order and broader screen-reader review remain before calling the accessibility audit fully complete.
 - **Task 03:** W3C Nu HTML Checker retest showed zero errors and zero warnings (17 November 2026).
 - **Task 04:** Responsive visual checks were completed at 320, 768, 1024, and 1440 CSS pixels. The document overflow expression returned `false` at each tested width. Internal table scrolling, where present, is distinct from page-level overflow.
 - **Task 05:** UI checks and live API CRUD were performed. The invalid POST returned 400 and the missing-record PUT returned 404. The automated validation suite contains seven tests.
@@ -250,3 +250,11 @@ This section consolidates later retests and supersedes earlier preliminary notes
 On 17 November 2026, a temporary test product was created in the deployed app. The Render service was restarted, and the record remained visible; a Neon database query also confirmed the persisted row. The temporary API test product used for the separate CRUD test was deleted. Existing catalogue records were not deleted during those API checks.
 
 Do not include or screenshot the value of `DATABASE_URL`; keep database credentials in Render's Environment settings.
+
+
+## Screen-reader result-count announcement — 17 November 2026
+
+The user tested the deployed application with Windows Narrator. After entering `Mouse` in the Search products field, Narrator announced the updated result count. This confirms the live result-count announcement for the tested search interaction.
+
+This was a user-confirmed manual check; no audio recording or screenshot was provided. It does not represent a complete screen-reader audit of the whole dashboard.
+
