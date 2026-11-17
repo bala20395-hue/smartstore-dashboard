@@ -4,7 +4,7 @@ Test the live app at https://smartstore-dashboard-i1t1.onrender.com. A free Rend
 
 ## UI checks
 
-1. Confirm that five demonstration products load.
+1. Confirm that the current product list loads from the server. Do not assume a fixed product count; records may be added during testing.
 2. Search for `Mouse`.
 3. Filter by category.
 4. Try each sort option.
@@ -46,4 +46,4 @@ Invoke-RestMethod -Method Delete -Uri "$base/api/products/$($created.id)"
 
 ## Evidence
 
-Capture actual browser screenshots and command output. Do not record a check as passed until it has been performed. Server product records are in memory and reset on process restart/redeployment.
+Capture actual browser screenshots and command output. Do not record a check as passed until it has been performed. When `DATABASE_URL` is configured, product records are stored in PostgreSQL and persist across service restarts. Without `DATABASE_URL`, the app uses in-memory demo records that reset when the server process restarts. LocalStorage is only a browser-side cache.
