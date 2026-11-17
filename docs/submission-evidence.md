@@ -12,7 +12,7 @@
 |---|---|---|
 | 02 — Accessibility and architecture audit | Lighthouse screenshot/score, keyboard notes, five evidence-backed issues with severity/remediation, architecture tree | Desktop and mobile Lighthouse screenshots from 16 November 2026 both show Accessibility 100 (mobile emulation 390 × 844). Save them as `task02-lighthouse-desktop-after-fix.png` and `task02-lighthouse-mobile.png`; remaining keyboard/manual checks and five evidence-backed findings are still required. |
 | 03 — Semantic HTML5 and accessible components | W3C validator result, semantic layout/form/table screenshots | Semantic markup and accessible form associations are implemented. Capture the validator result. |
-| 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | Responsive CSS is implemented. Capture viewport evidence. |
+| 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | Visual evidence collected at 320px, 768px, 1024px, and 1440px. Programmatic page-level overflow check and completion of all 768px/1024px full-page checks remain pending. |
 | 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence | Features and validation tests are present. Capture genuine deployed test evidence. |
 | 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, final feature checks, persistent state | GitHub and Render deployment are available. PostgreSQL adapter is implemented; set Render `DATABASE_URL` and test data across restart before marking persistence complete. |
 
@@ -58,17 +58,24 @@ This is consistent with the tablet CSS layout. The screenshot is a partial viewp
 Evidence filename: `task04-768px.png`.
 
 
-## Responsive viewport check — 1024px layout (partial visual check)
+## Responsive viewport check — 1024 × 768 (visual review)
 
-The user's Chrome responsive-emulation screenshot shows the viewport toolbar set to **1024 × 768 CSS pixels**. In the visible portion:
-- The navigation remains on one horizontal row.
-- Dashboard summary cards appear side by side.
-- The dashboard content remains within the preview width.
+The user's two Chrome responsive-emulation screenshots both show **1024 × 768 CSS pixels**.
 
-The screenshot captures only the upper portion of the page, so the full product-management area and the complete 1024px page-width/overflow behavior still need to be checked by scrolling through the page.
+Dashboard screenshot:
+- SmartStore logo and Dashboard / Products navigation are visible on one row.
+- Summary cards render in a two-column layout, with the third card wrapping to the next row.
 
-Evidence filename: `task04-1024px.png`.
+Product-management screenshot:
+- Product Management heading and Add Product button are visible.
+- Search occupies a full row; Category and Sort controls sit side by side.
+- Product inventory shows all six products with category, price, stock, Edit, and Delete controls.
 
+Result: **the dashboard and product-management areas were visually reviewed at 1024 × 768, and the visible controls fit within the captured viewport**. A separate programmatic document-level overflow measurement has not been captured, so do not claim a measured zero-overflow result from these screenshots alone.
+
+Evidence filenames:
+- `task04-1024px-dashboard.png`
+- `task04-1024px-products.png`
 
 ## Responsive viewport check — 1440px desktop layout (partial visual check)
 
