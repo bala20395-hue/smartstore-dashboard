@@ -150,6 +150,19 @@ Result: **the API rejected the observed invalid create request and missing-recor
 
 Evidence filename: `task05-api-negative-tests.png`.
 
+
+## Page-level horizontal overflow check — 1024px (17 November 2026)
+
+The user ran the following expression in Chrome DevTools Console at the **1024 × 768** responsive viewport:
+
+`document.documentElement.scrollWidth > document.documentElement.clientWidth`
+
+Observed result: **`false`**.
+
+Interpretation: no page-level horizontal overflow was detected at the tested 1024px viewport. This does not rule out the product table's own internal horizontal scroller, and it does not establish results for other viewport widths.
+
+Evidence/result: user-reported Console result on 17 November 2026.
+
 ## Recommended screenshot names
 
 - `task02-lighthouse-accessibility.png` (initial score 96)
