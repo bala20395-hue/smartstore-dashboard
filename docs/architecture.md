@@ -110,3 +110,17 @@ The dashboard shell uses these semantic regions:
 - `footer.footer`: project footer.
 
 The sidebar is a responsive section-navigation pattern: it links to the two main dashboard sections in the same document. It is not a separate multi-document page router. On narrow screens the sidebar links become a two-column navigation row.
+
+
+## Responsive styling system
+
+The CSS design system in `client/src/css/styles.css` includes:
+
+- Theme variables for page/surface colors, text, brand, borders, focus, shadows, and translucent glass surfaces.
+- Spacing, radius, typography, and transition tokens defined in `:root`.
+- A responsive dashboard grid with a desktop sidebar, a compact tablet navigation row, and a mobile navigation layout.
+- Breakpoint bands for 320px-class mobile, 768px tablet, 1024px compact desktop, and 1440px wide desktop layouts.
+- Subtle `backdrop-filter` blur on the top bar, sidebar, summary cards, and main panel; soft shadows; hover lift; and color/border/shadow transitions.
+- Light and dark theme variable sets, plus reduced-motion handling.
+
+The 320/768/1024/1440 viewport and page-overflow observations recorded before the semantic sidebar was introduced must be repeated against the latest deployed layout.
