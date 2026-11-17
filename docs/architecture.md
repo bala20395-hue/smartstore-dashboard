@@ -84,3 +84,11 @@ The browser validates required fields and sends JSON to Express. The server vali
 - PostgreSQL mode: enabled when `DATABASE_URL` is present; product records persist across server restarts.
 - Demo mode: used when `DATABASE_URL` is absent; data is held in memory and resets on server restart.
 - LocalStorage: browser-only cache and theme preference; not a shared database.
+
+
+## Current demo limitations and production hardening
+
+- Product CRUD routes are publicly reachable and currently have no authentication or authorization layer. Protect write operations before handling real inventory data.
+- API request rate limiting is not configured. Add route-level and/or edge-level rate limiting before wider public use.
+- The product-list query currently returns the full catalogue. Add bounded pagination when the catalogue grows.
+- The two accessibility source fixes (theme-aware high-contrast focus indicators and a live result-count status) are committed on the main branch. Verify them on the deployed app and test the announcements with a screen reader.
