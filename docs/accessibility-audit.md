@@ -70,7 +70,9 @@ Severity and priority describe the potential impact in the current public demo c
 - **Severity / priority:** Medium / P2.
 - **Remediation committed:** Added `role="status"`, `aria-live="polite"`, and `aria-atomic="true"` to the result-count element.
 - **Commit:** https://github.com/bala20395-hue/smartstore-dashboard/commit/5d5ec667196c2555de0d029b1a0088b7ef3dc711
-- **Retest:** Test search and filter changes with a screen reader. This source change has not yet been validated with a screen reader.
+- **Retest result (17 November 2026):** The user tested the deployed page with Windows Narrator. After entering `Mouse` in the Search products field, Narrator announced the updated product result count. **Screen-reader announcement check passed** for this search-result update.
+- **Evidence:** User-confirmed manual Narrator test on the deployed site; no screen-reader recording or screenshot was supplied.
+- **Retest scope:** This verifies the search-result count announcement. It is not a complete screen-reader audit of every page control or status message.
 
 ### Finding 3 — Product CRUD API has no authentication or authorization
 
@@ -130,7 +132,7 @@ PostgreSQL persistence was configured for the Render deployment and verified by 
 
 - [ ] Confirm the latest CSS and HTML commits are deployed on Render.
 - [ ] Retest visible focus in light and dark themes.
-- [ ] Test result-count announcements with a screen reader.
+- [x] Test result-count announcement with Windows Narrator (search query `Mouse`; updated count announced).
 - [ ] Complete a full keyboard tab-order review.
 - [ ] Save the actual screenshots in the course evidence folder.
 - [ ] Treat authentication, rate limiting, and pagination as production-hardening work if the application moves beyond a demo.
