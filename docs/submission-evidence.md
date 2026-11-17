@@ -14,7 +14,7 @@
 | 03 — Semantic HTML5 and accessible components | W3C validator result, semantic layout/form/table screenshots | Semantic header/nav/aside/main/section/article/footer landmarks, responsive sidebar navigation, labelled form controls, captioned table, and accessible modal dialog are in the repository. Earlier W3C run showed zero errors/warnings; **rerun W3C after the sidebar markup change** and capture an updated screenshot before final completion. |
 | 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | CSS now includes design tokens, responsive sidebar/grid breakpoints, glassmorphism/backdrop blur, shadows, transitions, theme variables, and reduced-motion handling. The earlier four viewport/overflow checks predate the sidebar and latest CSS; repeat them on the updated deployment and save fresh screenshots before marking final responsive verification complete. |
 | 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence, public API preview | Existing inventory UI/API CRUD, search/filter/sort, LocalStorage cache, and 400/404 negative tests passed. Added a separate asynchronous DummyJSON public catalogue preview with loading skeletons, friendly error state, category tabs, search, and sorting. New external API preview requires a post-deployment browser retest and screenshot before final evidence is complete. |
-| 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, final feature checks, persistent state | **Deployed and persistence verified:** public GitHub repo and Render app are live; Neon PostgreSQL data remained after a Render service restart. Evidence screenshot collection remains a user-side submission step. |
+| 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, authentication simulation, interactive CRUD, persistent state | Repository now includes a tab-scoped demo sign-in/sign-out simulation, saved product CRUD, a separate public sample catalogue, PostgreSQL persistence, README, and architecture documentation. Render deployment and database persistence were verified earlier; deploy the latest commits and perform a final live smoke test before claiming the newest UI is live. |
 
 
 
@@ -340,3 +340,34 @@ After Render deploys the latest commit:
 6. Capture a screenshot named `task05-public-api-preview.png`.
 
 Do not mark the external API browser interaction as verified until the user confirms the deployed test.
+
+
+## Task 06 — production capstone handover (17 November 2026)
+
+Implemented or available in the repository:
+- **Authentication simulation:** demo sign-in using a display name, session-scoped tab state, visible signed-in status, and sign-out.
+- **Interactive catalogue:** saved product catalogue with search, category filtering, sorting, and add/edit/delete operations; separate read-only public DummyJSON sample catalogue with search/category/sort.
+- **Persistent state:** PostgreSQL via Neon when `DATABASE_URL` is configured. Persistence across Render restart was previously verified with a test record.
+- **Deployment:** public Render app at https://smartstore-dashboard-i1t1.onrender.com.
+- **Project documentation:** README, architecture, deployment, testing, accessibility audit, and submission evidence files.
+
+Latest demo-auth commits:
+- HTML: https://github.com/bala20395-hue/smartstore-dashboard/commit/44386aa2aed15b2d6b863be6208fe74c53c53323
+- JavaScript: https://github.com/bala20395-hue/smartstore-dashboard/commit/edb5b1c8a7a69c9c5d770c0ab61bedfd44659b76
+- CSS: https://github.com/bala20395-hue/smartstore-dashboard/commit/36c0816f8bb7ef66a7037254bbc884974fb221b0
+
+### Authentication simulation scope
+
+The capstone sign-in is a demo-only UI simulation. It uses a display name in browser `sessionStorage`; it has no real password validation, server session, or server-side access control. The API remains public. The implementation is clearly labelled in the UI and README to avoid suggesting it is production authentication.
+
+### Final live deployment checks
+
+After Render deploys the latest main branch:
+1. Verify `/health` responds with the service status.
+2. Open the dashboard and test demo sign-in, refresh in the same tab, then sign out.
+3. Add one temporary product, edit it, refresh, and delete only that temporary record.
+4. Confirm the original saved inventory records remain present.
+5. Click **Fetch public products** and verify the external sample cards, category buttons, search, sort, and loading/error messages.
+6. Capture a screenshot named `task06-live-capstone.png`.
+
+Do not claim the current latest UI is live until the Render deploy and smoke test have actually completed.
