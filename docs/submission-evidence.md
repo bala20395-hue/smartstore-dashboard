@@ -13,7 +13,7 @@
 | 02 — Accessibility and architecture audit | Lighthouse screenshot/score, keyboard notes, five evidence-backed issues with severity/remediation, architecture tree | Lighthouse Accessibility 100 on desktop and mobile (390 × 844). Five source-review findings are documented; focus contrast and live result announcements have fixes committed. Full tab-order and screen-reader retests remain. |
 | 03 — Semantic HTML5 and accessible components | W3C validator result, semantic layout/form/table screenshots | Semantic header/nav/aside/main/section/article/footer landmarks, responsive sidebar navigation, labelled form controls, captioned table, and accessible modal dialog are in the repository. Earlier W3C run showed zero errors/warnings; **rerun W3C after the sidebar markup change** and capture an updated screenshot before final completion. |
 | 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | CSS now includes design tokens, responsive sidebar/grid breakpoints, glassmorphism/backdrop blur, shadows, transitions, theme variables, and reduced-motion handling. The earlier four viewport/overflow checks predate the sidebar and latest CSS; repeat them on the updated deployment and save fresh screenshots before marking final responsive verification complete. |
-| 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence | **Passed for observed tests:** UI search/filter/sort/CRUD checks, live API GET/POST/PUT/DELETE, and negative 400/404 checks completed. Seven validation unit tests are in the repository. |
+| 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence, public API preview | Existing inventory UI/API CRUD, search/filter/sort, LocalStorage cache, and 400/404 negative tests passed. Added a separate asynchronous DummyJSON public catalogue preview with loading skeletons, friendly error state, category tabs, search, and sorting. New external API preview requires a post-deployment browser retest and screenshot before final evidence is complete. |
 | 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, final feature checks, persistent state | **Deployed and persistence verified:** public GitHub repo and Render app are live; Neon PostgreSQL data remained after a Render service restart. Evidence screenshot collection remains a user-side submission step. |
 
 
@@ -305,3 +305,38 @@ document.documentElement.scrollWidth > document.documentElement.clientWidth
 ```
 
 Expected result for each viewport: `false`. Record only the values actually observed on the deployed latest build.
+
+
+## Task 05 — public REST API integration added (17 November 2026)
+
+A separate read-only External product catalogue preview was added to satisfy the public third-party API portion of the task while preserving the user's existing PostgreSQL catalogue.
+
+Implementation:
+- `client/src/js/api.js`: `getPublicProducts()` uses `async/await` and `fetch` against the DummyJSON products endpoint, requests a limited set of fields, checks the HTTP status, validates the response shape, and normalizes product fields.
+- `client/src/js/app.js`: fetches on user action, renders cards safely with DOM APIs, builds category filter buttons, applies live search and sort, and displays status/error states.
+- `client/index.html`: includes the External product catalogue section, search/sort controls, accessible category filter group, loading skeletons, and result count.
+- `client/src/css/styles.css`: styles the catalogue cards, category tabs, and loading skeletons.
+- Source: https://dummyjson.com/docs/products
+
+The external API catalogue is a read-only sample preview. It does not write demo products into the user's Neon/PostgreSQL inventory. DummyJSON explicitly describes its product write examples as simulated rather than persistent.
+
+Relevant commits:
+- UI: https://github.com/bala20395-hue/smartstore-dashboard/commit/c846f707ce755e923a79702586dd73d5322b01b4
+- API client: https://github.com/bala20395-hue/smartstore-dashboard/commit/7ddb4cf51c5fe6980e4b9a2447a499c7696e0b04
+- UI logic: https://github.com/bala20395-hue/smartstore-dashboard/commit/e0a7ef285a6eb356541b50fe250f4a3433fbc66e
+- Styling: https://github.com/bala20395-hue/smartstore-dashboard/commit/e53ef3d474c990e26929eecfbde26a5772c92207
+- CI JavaScript syntax check: https://github.com/bala20395-hue/smartstore-dashboard/commit/45d965521dad6eb14262472f42ac93736c3e995c
+
+GitHub Actions run 83 completed successfully, including the new `node --check` steps for `app.js` and `api.js`, plus the existing product validation test suite.
+
+### Post-deployment manual verification still required
+
+After Render deploys the latest commit:
+1. Open the live app and scroll to **External product catalogue**.
+2. Click **Fetch public products**.
+3. Confirm 12 sample cards load from DummyJSON and the loading skeleton disappears.
+4. Search for a term, choose a category tab, and change the sort order. Confirm the cards update without a page reload.
+5. Verify the saved inventory above still has its original six database records; the public sample preview is read-only.
+6. Capture a screenshot named `task05-public-api-preview.png`.
+
+Do not mark the external API browser interaction as verified until the user confirms the deployed test.
