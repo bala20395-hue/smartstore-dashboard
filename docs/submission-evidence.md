@@ -10,11 +10,11 @@
 
 | Task | Expected evidence | Current status |
 |---|---|---|
-| 02 — Accessibility and architecture audit | Lighthouse screenshot/score, keyboard notes, five evidence-backed issues with severity/remediation, architecture tree | Desktop and mobile Lighthouse screenshots from 16 November 2026 both show Accessibility 100 (mobile emulation 390 × 844). Save them as `task02-lighthouse-desktop-after-fix.png` and `task02-lighthouse-mobile.png`; remaining keyboard/manual checks and five evidence-backed findings are still required. |
-| 03 — Semantic HTML5 and accessible components | W3C validator result, semantic layout/form/table screenshots | Semantic markup and accessible form associations are implemented. Capture the validator result. |
-| 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | Visual evidence collected at 320px, 768px, 1024px, and 1440px. Page-level overflow expression returned `false` at all four widths (320, 768, 1024, 1440 CSS px). Retain the screenshots as course evidence. |
-| 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence | Features and validation tests are present. Capture genuine deployed test evidence. |
-| 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, final feature checks, persistent state | GitHub and Render deployment are available. PostgreSQL adapter is implemented; set Render `DATABASE_URL` and test data across restart before marking persistence complete. |
+| 02 — Accessibility and architecture audit | Lighthouse screenshot/score, keyboard notes, five evidence-backed issues with severity/remediation, architecture tree | Lighthouse Accessibility 100 on desktop and mobile (390 × 844). Five source-review findings are documented; focus contrast and live result announcements have fixes committed. Full tab-order and screen-reader retests remain. |
+| 03 — Semantic HTML5 and accessible components | W3C validator result, semantic layout/form/table screenshots | **Passed:** user's W3C Nu HTML Checker screenshot (17 Nov 2026) showed zero errors and zero warnings. |
+| 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | **Passed:** visual checks at 320, 768, 1024, and 1440px; page-level overflow expression returned `false` at all four widths. |
+| 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence | **Passed for observed tests:** UI search/filter/sort/CRUD checks, live API GET/POST/PUT/DELETE, and negative 400/404 checks completed. Seven validation unit tests are in the repository. |
+| 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, final feature checks, persistent state | **Deployed and persistence verified:** public GitHub repo and Render app are live; Neon PostgreSQL data remained after a Render service restart. Evidence screenshot collection remains a user-side submission step. |
 
 
 
@@ -228,3 +228,25 @@ Do not mark evidence captured until the actual screenshot or test output is save
 - Persistence verified after service restart: Yes / No
 - Live deployment smoke test:
 - Mentor feedback:
+
+
+## Final consolidated status — 17 November 2026
+
+This section consolidates later retests and supersedes earlier preliminary notes above where they said that a check was still pending.
+
+- **Task 02:** Lighthouse scores are 100 desktop and mobile. Keyboard interactions are documented for the dialog, row actions, category filter, sort, and search. Five evidence-backed source findings are recorded in `docs/accessibility-audit.md`; two accessibility changes are committed. Verify the latest commits on the Render deployment, perform the screen-reader test, and complete the full tab-order review before calling the accessibility audit fully complete.
+- **Task 03:** W3C Nu HTML Checker retest showed zero errors and zero warnings (17 November 2026).
+- **Task 04:** Responsive visual checks were completed at 320, 768, 1024, and 1440 CSS pixels. The document overflow expression returned `false` at each tested width. Internal table scrolling, where present, is distinct from page-level overflow.
+- **Task 05:** UI checks and live API CRUD were performed. The invalid POST returned 400 and the missing-record PUT returned 404. The automated validation suite contains seven tests.
+- **Task 06:** Render app and GitHub repository are available. PostgreSQL persistence was verified after a Render service restart on 17 November 2026. The user still needs to save the actual screenshots into the course submission folder; the filenames in this register are naming suggestions, not files stored in the repository.
+
+### Latest accessibility code commits
+
+- Focus-indicator contrast: https://github.com/bala20395-hue/smartstore-dashboard/commit/963e27d871858ebc8e47b4cfd815b1aa68bff664
+- Live result-count announcement: https://github.com/bala20395-hue/smartstore-dashboard/commit/5d5ec667196c2555de0d029b1a0088b7ef3dc711
+
+### PostgreSQL persistence verification
+
+On 17 November 2026, a temporary test product was created in the deployed app. The Render service was restarted, and the record remained visible; a Neon database query also confirmed the persisted row. The temporary API test product used for the separate CRUD test was deleted. Existing catalogue records were not deleted during those API checks.
+
+Do not include or screenshot the value of `DATABASE_URL`; keep database credentials in Render's Environment settings.
