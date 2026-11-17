@@ -234,7 +234,7 @@ Do not mark evidence captured until the actual screenshot or test output is save
 
 This section consolidates later retests and supersedes earlier preliminary notes above where they said that a check was still pending.
 
-- **Task 02:** Lighthouse scores are 100 desktop and mobile. Keyboard interactions are documented for the dialog, row actions, category filter, sort, and search. Windows Narrator announced the updated result count after the user searched for `Mouse` on the deployed app. Five evidence-backed source findings are recorded in `docs/accessibility-audit.md`; two accessibility changes are committed. A full end-to-end tab-order and broader screen-reader review remain before calling the accessibility audit fully complete.
+- **Task 02:** Lighthouse scores are 100 desktop and mobile. The user confirmed the full keyboard sequence passed, including visible focus through the navigation and product controls. Windows Narrator announced the updated result count after the user searched for `Mouse`. Five evidence-backed source findings are recorded in `docs/accessibility-audit.md`; two accessibility changes are committed. The current manual keyboard and tested screen-reader checks are recorded as passed; screenshot filing and deployment verification of the latest commits remain.
 - **Task 03:** W3C Nu HTML Checker retest showed zero errors and zero warnings (17 November 2026).
 - **Task 04:** Responsive visual checks were completed at 320, 768, 1024, and 1440 CSS pixels. The document overflow expression returned `false` at each tested width. Internal table scrolling, where present, is distinct from page-level overflow.
 - **Task 05:** UI checks and live API CRUD were performed. The invalid POST returned 400 and the missing-record PUT returned 404. The automated validation suite contains seven tests.
@@ -258,3 +258,8 @@ The user tested the deployed application with Windows Narrator. After entering `
 
 This was a user-confirmed manual check; no audio recording or screenshot was provided. It does not represent a complete screen-reader audit of the whole dashboard.
 
+
+
+## Full keyboard navigation check — 17 November 2026
+
+The user confirmed the full keyboard-only navigation pass on the deployed dashboard: skip link, navigation links, theme toggle, Add Product, search, category, sort, and product-row Edit/Delete actions were reachable in a logical order with visible focus. This is a user-confirmed manual test; a screenshot of the entire tab sequence was not supplied.
