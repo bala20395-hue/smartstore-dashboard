@@ -16,6 +16,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Check frontend JavaScript syntax
+        run: |
+          node --check client/src/js/app.js
+          node --check client/src/js/api.js
       - name: Run product validation tests
         working-directory: server
         run: |
