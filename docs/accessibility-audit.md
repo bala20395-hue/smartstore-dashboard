@@ -1,233 +1,136 @@
-# Accessibility Baseline & Repository Architecture Audit
+# Accessibility and Architecture Audit
 
-## Audit status
+## Audit scope and current status
 
-This file is a worksheet and preliminary source-code review, not a completed Lighthouse audit. Record scores, keyboard observations, and findings only after testing the selected public website in a real browser and saving evidence.
+- Website: SmartStore Dashboard
+- URL: https://smartstore-dashboard-i1t1.onrender.com
+- Review dates: 16–17 November 2026
+- Browser: Chrome on Windows (exact browser build was not recorded)
+- Review type: Lighthouse, keyboard-only interaction checks, HTML validation, and source-code review
 
-## Project architecture reviewed
+This is a combined accessibility and repository architecture review. The five findings below are evidence-backed source-review findings; they are not five Lighthouse failures. Two accessibility improvements have been committed. Three production-hardening items remain recommendations for a public demo deployment.
 
-- `client/`: semantic HTML, responsive CSS, browser UI, and API client.
-- `server/`: Express server, REST endpoints, product validation, and demo data.
-- `docs/`: architecture and evidence documentation.
-- `tests/`: automated product-validation tests.
+## Lighthouse results
 
-Request flow: browser UI → `client/src/js/api.js` → Express `/api/products` → JSON response → product table update.
-
-## Website details — complete during the real audit
-
-- Website name:
-- Website URL:
-- Date tested:
-- Browser and version:
-- Viewport / device:
-- Auditor:
-
-## Lighthouse procedure
-
-1. Open the chosen public-facing website in Chrome.
-2. Open Developer Tools (`F12`) and select **Lighthouse**.
-3. Select Accessibility and the device mode.
-4. Run the audit and save the report screenshot.
-5. Record the exact score, failed audit names, affected elements, and URL.
-
-- Accessibility score:
-- Screenshot filename:
-- Failed audits observed:
-- Notes:
-
-## Keyboard-only procedure
-
-1. Reload the target website and do not use a mouse.
-2. Use `Tab` and `Shift + Tab` to navigate.
-3. Use `Enter` and `Space` to activate controls.
-4. Confirm focus is visible and order is logical.
-5. Open and close menus/dialogs using the keyboard; check for focus traps or lost focus.
-6. Record exact controls and observed behavior.
-
-- Keyboard test result:
-- Evidence filename:
-- Notes:
-
-
-## Lighthouse result — initial desktop run (16 November 2026)
+### Desktop — 16 November 2026
 
 The user's captured Lighthouse report showed:
-- Accessibility: **96**
+
+- Accessibility: **100**
 - Best Practices: **100**
 - SEO: **91**
-- Contrast audit: **Background and foreground colors do not have a sufficient contrast ratio**
-- Failing elements listed by Lighthouse: `p.muted`, `body`, and `p`
+- The earlier insufficient text contrast warning was no longer shown after the muted-text color correction.
+- Lighthouse listed 10 additional items for manual review. These are prompts for human checking, not 10 automated failures.
 
-### Verified source-level cause and remediation
+Evidence filename: `task02-lighthouse-desktop-after-fix.png`.
 
-The light-theme CSS originally used:
-- Muted foreground: `#687386`
-- Page background: `#f4f6fa`
-- Calculated contrast ratio for this pair: **4.43:1**, below the WCAG AA 4.5:1 threshold for normal text.
+### Mobile — 16 November 2026
 
-The light-theme muted token was changed to `#626d7d`. Its calculated contrast ratio against `#f4f6fa` is approximately **4.85:1**. The dark-theme muted token was not changed.
+The user's captured Lighthouse report showed:
 
-- Remediation commit: https://github.com/bala20395-hue/smartstore-dashboard/commit/6987860437e9c1b2c2c0a8572331ab6aec639732
-- Initial Lighthouse screenshot: retain as `task02-lighthouse-desktop-before-fix.png`.
-- Retest required: rerun Lighthouse after the new Render deployment is live and record the new score and any remaining failing elements. The original report also listed generic `body` and `p` nodes; confirm whether they remain in the retest rather than assuming this one token explains every item.
-
-
-## Lighthouse retest — desktop after contrast remediation (16 November 2026)
-
-The user's follow-up Lighthouse screenshot shows:
-- Accessibility: **100**
-- The earlier insufficient text contrast warning is no longer displayed in this report.
-- Lighthouse still lists **10 additional items to manually check**. These are manual review prompts, not automated failures and not proof that the checks passed.
-
-Retest evidence filename: `task02-lighthouse-desktop-after-fix.png`.
-
-Manual keyboard, focus-order, visible-focus, dialog, accessible-name, and screen-reader-related checks remain to be performed and documented separately. Do not mark them passed based on the Lighthouse score alone.
-
-
-
-## Lighthouse retest — mobile viewport (16 November 2026)
-
-The user's captured Chrome Lighthouse screenshot shows:
 - Emulated viewport: **390 × 844 CSS pixels**
-- Lighthouse device mode: **Mobile**
-- Accessibility score: **100**
-- Lighthouse lists 10 additional manual review items. These are not automated failures and must be checked separately.
+- Device mode: **Mobile**
+- Accessibility: **100**
+- Lighthouse listed 10 additional manual-review prompts.
 
 Evidence filename: `task02-lighthouse-mobile.png`.
 
-The screenshot demonstrates a successful automated Accessibility audit at the 390 × 844 mobile emulation size. It does not independently establish that every responsive breakpoint (320px, 768px, 1024px, 1440px), horizontal overflow behavior, or every manual accessibility check has passed.
+A score of 100 is not, by itself, proof of full WCAG conformance. Keyboard and assistive-technology checks remain important.
 
-## Keyboard-only test — product dialog focus flow
+## Keyboard-only checks observed — 16–17 November 2026
 
-Observed manually on the deployed SmartStore interface in Chrome on 16 November 2026:
+The following interactions were observed in the deployed Chrome browser:
 
-- The Add product button displayed a visible keyboard focus indicator.
-- Pressing Enter opened the product dialog.
-- Initial focus moved to the Product name field.
-- Pressing Shift+Tab from the first field moved focus to the dialog's Close button, which displayed a visible focus indicator.
-- Pressing Enter on Close dismissed the dialog.
-- Focus returned to the Add product button after dismissal.
+1. **Add Product dialog:** Add Product received visible keyboard focus. Enter opened the dialog and focus moved to Product name. Shift+Tab reached the Close button. Enter closed the dialog and focus returned to Add Product.
+2. **Product actions:** Edit and Delete buttons for the Mechanical Keyboard row could receive visible keyboard focus. Delete was not activated; no catalogue product was removed during this focus check.
+3. **Category filter:** The Category select received keyboard focus. Selecting Testing filtered the list to the DB Persistence Test record.
+4. **Sort:** The Sort by select received focus. Selecting Price (low to high) displayed all six records in ascending price order: DB Persistence Test (₹123), Notebook Set (₹299), Wireless Mouse (₹799), Desk Lamp (₹1,199), USB-C Hub (₹1,499), Mechanical Keyboard (₹2,499).
+5. **Search:** The Search products field received focus. Entering Mouse displayed Wireless Mouse and the result count changed to 1 of 6.
 
-Result: **the tested product-dialog open/close focus flow passed**. This does not by itself verify every keyboard check (search, selects, edit/delete actions, logical tab order throughout the whole page, screen-reader announcements, and focus behavior for all controls). Continue those tests separately.
+These checks cover the listed controls only. A complete screen-reader review and an end-to-end tab-order review have not been recorded.
 
-Evidence filenames:
-- `task02-keyboard-dialog-open.png`
-- `task02-keyboard-dialog-close-focus-return.png`
+## Five evidence-backed findings
 
+Severity and priority describe the potential impact in the current public demo context. Findings 1 and 2 have source fixes committed; verify the deployed version after Render finishes deploying. Findings 3–5 are production-hardening recommendations, not Lighthouse failures.
 
-### Keyboard navigation — product action control
+### Finding 1 — Low-contrast custom keyboard focus indicator
 
-The user's follow-up browser screenshot shows a visible focus indicator on the **Edit** button for the “Mechanical Keyboard” row after Tab navigation. This confirms the product-row Edit action can receive keyboard focus in the tested desktop browser.
+- **Evidence:** The original `:focus-visible` rule used `outline: 3px solid #e0a400`. Its calculated contrast was approximately **2.05:1** against the light page background `#f4f6fa` and **2.22:1** against white surfaces.
+- **User impact:** Keyboard users with low vision may have difficulty distinguishing which control currently has focus.
+- **Guideline:** WCAG 2.2 SC 1.4.11 requires visual information identifying a focused component state to have at least 3:1 contrast against adjacent colors. Reference: https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast
+- **Severity / priority:** Medium / P1.
+- **Remediation committed:** Added theme-specific focus tokens: `#244582` in the light theme and `#91b4ff` in the dark theme. Calculated contrast is at least **8.63:1** for the tested adjacent page/surface colors.
+- **Commit:** https://github.com/bala20395-hue/smartstore-dashboard/commit/963e27d871858ebc8e47b4cfd815b1aa68bff664
+- **Retest:** Confirm visible focus in both themes after deployment.
 
-- Evidence filename: `task02-keyboard-product-edit-focus.png`
-- Remaining check: verify the Delete button immediately after it, and verify both Edit and Delete actions for a row using the keyboard. Also finish the remaining manual checks before declaring the full keyboard audit complete.
+### Finding 2 — Dynamic product result count was not a live region
 
+- **Evidence:** The original result-count paragraph was updated by `renderProducts()` in `client/src/js/app.js`, but its HTML element did not have live-region semantics.
+- **User impact:** A screen-reader user changing search, category, or sort controls might not be informed that the number of displayed products changed.
+- **Severity / priority:** Medium / P2.
+- **Remediation committed:** Added `role="status"`, `aria-live="polite"`, and `aria-atomic="true"` to the result-count element.
+- **Commit:** https://github.com/bala20395-hue/smartstore-dashboard/commit/5d5ec667196c2555de0d029b1a0088b7ef3dc711
+- **Retest:** Test search and filter changes with a screen reader. This source change has not yet been validated with a screen reader.
 
-### Keyboard navigation — product Delete action
+### Finding 3 — Product CRUD API has no authentication or authorization
 
-The user's browser screenshot shows a visible keyboard focus indicator on the **Delete** button for the “Mechanical Keyboard” row immediately after the Edit button in the tab sequence. This confirms that the Delete action is keyboard-focusable in the tested desktop browser.
+- **Evidence:** `server/src/server.js` mounts `/api/products` directly to the products router. The GET, POST, PUT, and DELETE handlers in `server/src/routes/products.js` do not apply an authentication or authorization check.
+- **User impact:** Anyone who can reach the public API can attempt to create, update, or delete catalogue records.
+- **Severity / priority:** High / P1 before use with real business data; acceptable only as a clearly understood single-demo limitation.
+- **Remediation recommendation:** Add authenticated user sessions or an API authorization layer, and restrict create/update/delete operations to an authorized role before production use.
+- **Status:** Open — intentionally not added to this beginner capstone demo.
 
-- Evidence filename: `task02-keyboard-product-delete-focus.png`
-- Safety note: the Delete action was focused but not activated; no product was intentionally deleted during this check.
+### Finding 4 — Public API has no request rate limiting
 
+- **Evidence:** The Express application configures a JSON body-size limit but does not configure request-rate limiting middleware. No rate-limiting dependency is present in `server/package.json`.
+- **User impact:** Repeated requests can consume application or database resources and affect availability.
+- **Severity / priority:** Medium / P2 before wider public use.
+- **Remediation recommendation:** Add a suitable rate limiter for API routes and consider provider-level abuse protection and monitoring.
+- **Status:** Open — production-hardening recommendation.
 
-### Keyboard navigation — category filter
+### Finding 5 — Product-list endpoint has no pagination
 
-The user's deployed-site screenshot shows the Category select control with a visible focus indicator and the `Testing` category selected. The product table is filtered to the matching “DB Persistence Test” record.
+- **Evidence:** The PostgreSQL list query in `server/src/routes/products.js` selects every product row and sorts the full result; it does not use a page size, limit, or cursor.
+- **User impact:** Response size and query work can grow with catalogue size, increasing load time and memory use for larger stores.
+- **Severity / priority:** Low / P3 for the current six-record demo; Medium for a large catalogue.
+- **Remediation recommendation:** Add bounded pagination (for example, `limit` plus a page or cursor parameter), validate the requested page size, and add a corresponding UI navigation pattern.
+- **Status:** Open — current demo catalogue is small.
 
-- Result: category selection and filtering worked in the keyboard test sequence.
-- Evidence filename: `task02-keyboard-category-filter.png`
-- Remaining checks: keyboard navigation through the Sort by select, search field, and all other controls; verify the complete page tab order and focus visibility.
+## Earlier remediation history
 
+### Insufficient text contrast — resolved
 
-### Keyboard navigation — sort select
+The initial desktop Lighthouse report (16 November 2026) showed Accessibility 96 and an insufficient background/foreground contrast warning. It listed `p.muted`, `body`, and `p`.
 
-The user's browser screenshot shows the **Sort by** select control with a visible focus indicator. This confirms that the control is reachable by keyboard in the tested desktop browser.
+The light-theme muted token was changed from `#687386` to `#626d7d`. Against `#f4f6fa`, the calculated contrast changed from approximately **4.43:1** to **4.85:1**.
 
-- Current selection shown in the screenshot: `Stock (high to low)`.
-- This screenshot does not yet verify that the requested `Price (low to high)` sort was selected or that ordering was correct, because the Category filter is set to `Testing` and only one product is visible.
-- Remaining check: select `All categories`, then choose `Price (low to high)` using the keyboard and confirm the list is ordered by increasing price.
-- Evidence filename: `task02-keyboard-sort-focus.png`.
+- Remediation commit: https://github.com/bala20395-hue/smartstore-dashboard/commit/6987860437e9c1b2c2c0a8572331ab6aec639732
+- The later desktop Lighthouse screenshot showed Accessibility 100 and no longer displayed the earlier contrast warning.
 
+### HTML validator warnings — resolved under Task 03
 
-### Keyboard navigation — category and price sorting
+The initial W3C Nu HTML Checker capture showed three warnings: “Article lacks heading” for the three dashboard statistic articles. Each article was given a semantic `h2` heading, with CSS updated to preserve the compact appearance.
 
-The user's deployed-site screenshot shows:
-- Category filter set to `All categories`.
-- Sort control focused (visible focus indicator) and set to `Price (low to high)`.
-- All six products displayed in ascending price order: DB Persistence Test (₹123), Notebook Set (₹299), Wireless Mouse (₹799), Desk Lamp (₹1,199), USB-C Hub (₹1,499), Mechanical Keyboard (₹2,499).
+- HTML commit: https://github.com/bala20395-hue/smartstore-dashboard/commit/89d892d01301c1c76ca1843a84769622bbdc5576
+- CSS commit: https://github.com/bala20395-hue/smartstore-dashboard/commit/735810c8268c3a802684abf34032845b02788354
+- The user's later W3C screenshot (17 November 2026) showed: **“Document checking completed. No errors or warnings to show.”**
 
-Result: **keyboard selection of the price sort and correct ascending product order observed**.
+## Repository architecture summary
 
-- Evidence filename: `task02-keyboard-price-sort.png`
-- Remaining check: search field keyboard operation, full tab sequence review, responsive checks, and any other manual checks required by the rubric.
+- `client/`: semantic HTML, responsive CSS, browser interactions, and API client.
+- `server/`: Express server, product REST routes, validation, and PostgreSQL adapter.
+- `tests/`: automated product-validation tests.
+- `docs/`: architecture, deployment, audit, and submission evidence.
 
+Request flow: browser UI → `client/src/js/api.js` → Express `/api/products` → validation and route handler → PostgreSQL when `DATABASE_URL` is configured, otherwise in-memory demo data → JSON response → rendered product table.
 
-### Keyboard navigation — search field
+PostgreSQL persistence was configured for the Render deployment and verified by creating a record, restarting the Render service, and confirming the record remained in the database. Do not publish the connection string or credentials.
 
-The user's deployed-site screenshot shows the Search products input with a visible focus indicator and the query `Mouse` entered. The results table displays only `Wireless Mouse` and the result count reads `Showing 1 of 6 products`.
+## Remaining verification
 
-Result: **search input was keyboard-focusable, accepted text, and filtered the product list as expected**.
-
-- Evidence filename: `task02-keyboard-search-filter.png`
-
-## Five verified findings
-
-Do not invent findings. Each item must include real evidence and a practical remediation.
-
-### Finding 1
-- Issue:
-- Evidence (URL, element, screenshot):
-- User impact:
-- Severity: Critical / High / Medium / Low
-- Remediation:
-- Priority: P0 / P1 / P2 / P3
-
-### Finding 2
-- Issue:
-- Evidence:
-- User impact:
-- Severity:
-- Remediation:
-- Priority:
-
-### Finding 3
-- Issue:
-- Evidence:
-- User impact:
-- Severity:
-- Remediation:
-- Priority:
-
-### Finding 4
-- Issue:
-- Evidence:
-- User impact:
-- Severity:
-- Remediation:
-- Priority:
-
-### Finding 5
-- Issue:
-- Evidence:
-- User impact:
-- Severity:
-- Remediation:
-- Priority:
-
-## SmartStore source-code review notes (not Lighthouse findings)
-
-- Product dialog focus returns to the control that opened it, including the relevant Edit button.
-- Product form inputs reference inline errors and update `aria-invalid`.
-- Product records use PostgreSQL when `DATABASE_URL` is configured. If the variable is absent, the application deliberately falls back to in-memory demonstration data. LocalStorage is only a browser cache, not shared durable storage.
-
-Re-run browser keyboard testing after the deployed changes are live.
-
-## Evidence checklist
-
-- [ ] Lighthouse screenshot and score
-- [ ] Keyboard-only navigation notes and screenshot
-- [ ] Five verified findings with evidence
-- [ ] Severity and remediation priority for each
-- [ ] Architecture diagram / request flow
-- [ ] Retest results
+- [ ] Confirm the latest CSS and HTML commits are deployed on Render.
+- [ ] Retest visible focus in light and dark themes.
+- [ ] Test result-count announcements with a screen reader.
+- [ ] Complete a full keyboard tab-order review.
+- [ ] Save the actual screenshots in the course evidence folder.
+- [ ] Treat authentication, rate limiting, and pagination as production-hardening work if the application moves beyond a demo.
