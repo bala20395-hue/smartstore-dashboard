@@ -128,11 +128,21 @@ Request flow: browser UI → `client/src/js/api.js` → Express `/api/products` 
 
 PostgreSQL persistence was configured for the Render deployment and verified by creating a record, restarting the Render service, and confirming the record remained in the database. Do not publish the connection string or credentials.
 
+## Final manual retest — full keyboard sequence (17 November 2026)
+
+The user confirmed that the full keyboard-only navigation check passed on the deployed page:
+
+- Focus moved through the skip link, navigation links, theme button, Add Product control, Search products field, Category select, Sort by select, and product-row Edit/Delete actions.
+- The user confirmed the focus sequence was logical and the focused controls remained visibly indicated.
+- This is a user-confirmed manual result. No screenshot or video of the complete sequence was supplied.
+
+Together with the Windows Narrator search-result announcement test and the earlier dialog open/close, filtering, sorting, and search checks, the recorded keyboard interactions have been exercised. This does not certify full WCAG conformance or replace testing with additional assistive technologies.
+
 ## Remaining verification
 
 - [ ] Confirm the latest CSS and HTML commits are deployed on Render.
-- [ ] Retest visible focus in light and dark themes.
+- [x] Retest visible focus in light and dark themes (user supplied screenshots).
 - [x] Test result-count announcement with Windows Narrator (search query `Mouse`; updated count announced).
-- [ ] Complete a full keyboard tab-order review.
+- [x] Complete the user's full keyboard tab-order review (user-confirmed; no full-sequence screenshot supplied).
 - [ ] Save the actual screenshots in the course evidence folder.
 - [ ] Treat authentication, rate limiting, and pagination as production-hardening work if the application moves beyond a demo.
