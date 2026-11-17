@@ -21,3 +21,12 @@ This folder is the repository destination for the Task 02 evidence screenshots.
 The screenshots themselves must be committed alongside this file before the repository is used as the final evidence link. The locally prepared ZIP is not automatically stored in GitHub.
 
 See [the accessibility audit](../accessibility-audit.md) and [submission evidence register](../submission-evidence.md) for the detailed test notes.
+
+
+## Task 05 — REST API and DOM evidence
+
+| Filename | What it demonstrates | Evidence status |
+|---|---|---|
+| `task05-public-api-preview.png` | DummyJSON public products loaded, category tabs, search/sort controls, and result count | Capture from the latest deployed app after clicking **Fetch public products** |
+| `task05-public-api-search.png` | Live filtering of the external sample catalogue | Optional supporting screenshot |
+| `task05-api-get-post-put-delete.png` | Live CRUD API request/response sequence | Existing API test evidence filename recorded in submission register |
