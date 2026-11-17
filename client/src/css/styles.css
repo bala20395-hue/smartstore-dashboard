@@ -126,8 +126,75 @@ a {
   font-size: 1.25rem;
 }
 
+.app-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  width: min(1440px, 96%);
+  margin: 0 auto;
+}
+
+.sidebar {
+  position: sticky;
+  top: 1rem;
+  margin-top: 2.25rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+.sidebar-heading {
+  margin: 0 0 .8rem;
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.sidebar-link {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  padding: .75rem;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.sidebar-link:hover,
+.sidebar-link[aria-current="page"] {
+  color: var(--brand);
+  background: var(--surface-soft);
+  border-color: var(--border);
+}
+
+.sidebar-link-title {
+  font-weight: 750;
+}
+
+.sidebar-link-description,
+.sidebar-note {
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.sidebar-note {
+  margin: 1rem 0 0;
+}
+
 .page-shell {
-  width: min(1180px, 90%);
+  width: 100%;
+  min-width: 0;
   margin: 2.25rem auto 3rem;
 }
 
@@ -476,8 +543,23 @@ tbody tr:hover {
 }
 
 @media (max-width: 760px) {
-  .page-shell {
+  .app-layout {
+    display: block;
     width: min(94%, 600px);
+  }
+
+  .sidebar {
+    position: static;
+    margin-top: 1.25rem;
+  }
+
+  .sidebar-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-shell {
+    width: 100%;
     margin-top: 1.5rem;
   }
 
