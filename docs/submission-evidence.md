@@ -152,6 +152,17 @@ Evidence filename: `task05-api-negative-tests.png`.
 
 
 
+
+## Page-level horizontal overflow check — 768px (17 November 2026)
+
+The user ran the same Chrome DevTools expression at the **768 × 1024** responsive viewport:
+
+`document.documentElement.scrollWidth > document.documentElement.clientWidth`
+
+Observed result: **`false`**.
+
+Interpretation: no page-level horizontal overflow was detected at the tested 768px viewport. This does not rule out internal overflow regions such as the product table's own scroller.
+
 ## Page-level horizontal overflow check — 320px (17 November 2026)
 
 The user ran the same Chrome DevTools expression at the **320 × 700** responsive viewport:
