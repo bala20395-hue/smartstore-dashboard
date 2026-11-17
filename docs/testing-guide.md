@@ -67,3 +67,20 @@ document.documentElement.scrollWidth > document.documentElement.clientWidth
 ```
 
 Record `false` only when observed. The earlier viewport checks occurred before the semantic sidebar and most recent breakpoint updates, so they are not a substitute for this regression pass.
+
+
+## Public REST API preview (Task 05)
+
+1. Deploy the latest main branch to Render.
+2. Open the live dashboard and scroll to **External product catalogue**.
+3. Click **Fetch public products** and confirm loading skeleton cards appear while the request is pending.
+4. Confirm sample products load and the result count appears.
+5. Search for a product term and confirm results update immediately.
+6. Select a category tab and confirm only that category remains.
+7. Change sorting between price low-to-high, price high-to-low, stock high-to-low, and name A–Z.
+8. Confirm the inventory table and saved database products above were not changed by loading external sample data.
+9. When offline/API unavailable, confirm a friendly error message appears and the Fetch public products button becomes available to retry.
+
+Source documentation: https://dummyjson.com/docs/products
+
+The DummyJSON catalogue is sample data. Its documented POST/PUT/DELETE examples simulate writes and are not persistent.
