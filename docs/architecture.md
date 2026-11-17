@@ -138,3 +138,15 @@ The dashboard includes a separate, read-only sample catalogue preview so that th
 6. Loading skeletons appear while the request is pending; a friendly status error is shown when the API cannot be reached.
 
 The sample catalogue is read-only and does not create, edit, or delete the user's Neon/PostgreSQL product records. DummyJSON describes this endpoint as fictional/sample product data for testing and prototyping. Its simulated write examples do not persist changes on its service.
+
+
+## Demo authentication simulation
+
+The page includes a deliberately lightweight sign-in/sign-out simulation for the capstone demonstration:
+
+1. The visitor selects **Demo sign in** and enters a display name.
+2. The app stores only that display name in the current tab's `sessionStorage` under `smartstore-demo-session`.
+3. The workspace status changes to show the demo user, and the control becomes **Demo sign out**.
+4. Refreshing the same tab retains the simulated session; signing out clears it.
+
+This is not production authentication: there is no password, identity provider, server-side session, authorization middleware, or access-control enforcement. The product REST API remains publicly accessible. Do not use this demo session as a security boundary or for protecting real customer or business data.
