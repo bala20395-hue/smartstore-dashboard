@@ -10,9 +10,20 @@ const elements = {
   price: document.querySelector("#product-price"), stock: document.querySelector("#product-stock"),
   formError: document.querySelector("#form-error"), addButton: document.querySelector("#add-product-button"),
   closeButton: document.querySelector("#close-dialog-button"), cancelButton: document.querySelector("#cancel-button"),
-  themeButton: document.querySelector("#theme-toggle")
+  themeButton: document.querySelector("#theme-toggle"),
+  externalButton: document.querySelector("#load-external-button"),
+  externalStatus: document.querySelector("#external-status"),
+  externalControls: document.querySelector("#external-controls"),
+  externalSearch: document.querySelector("#external-search-input"),
+  externalSort: document.querySelector("#external-sort-select"),
+  externalCategoryTabs: document.querySelector("#external-category-tabs"),
+  externalSkeletons: document.querySelector("#external-skeletons"),
+  externalGrid: document.querySelector("#external-product-grid"),
+  externalResultCount: document.querySelector("#external-result-count")
 };
 let products = [];
+let externalProducts = [];
+let selectedExternalCategory = "all";
 let dialogTrigger = null;
 
 function saveCache() {
@@ -184,6 +195,124 @@ async function deleteProduct(product) {
     saveCache(); updateCategoryOptions(); renderProducts(); setStatus(`${product.name} deleted.`);
   } catch (error) { setStatus(error.message, true); }
 }
+function setExternalStatus(message, isError = false) {
+  elements.externalStatus.textContent = message;
+  elements.externalStatus.classList.toggle("error", isError);
+}
+
+function renderExternalCategoryTabs() {
+  const categories = [...new Set(externalProducts.map((product) => product.category))].sort();
+  elements.externalCategoryTabs.replaceChildren();
+
+  for (const category of ["all", ...categories]) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "category-tab";
+    button.dataset.category = category;
+    button.textContent = category === "all"
+      ? "All categories"
+      : category.replace(/-/g, " ").replace(/\\b\\w/g, (letter) => letter.toUpperCase());
+    button.setAttribute("aria-pressed", String(selectedExternalCategory === category));
+    elements.externalCategoryTabs.append(button);
+  }
+}
+
+function renderExternalProducts() {
+  const query = elements.externalSearch.value.trim().toLowerCase();
+  const visible = externalProducts.filter((product) => {
+    const matchesQuery = `${product.name} ${product.category}`.toLowerCase().includes(query);
+    const matchesCategory = selectedExternalCategory === "all"
+      || product.category === selectedExternalCategory;
+    return matchesQuery && matchesCategory;
+  });
+
+  const sorters = {
+    "name-asc": (a, b) => a.name.localeCompare(b.name),
+    "price-asc": (a, b) => a.price - b.price,
+    "price-desc": (a, b) => b.price - a.price,
+    "stock-desc": (a, b) => b.stock - a.stock
+  };
+  visible.sort(sorters[elements.externalSort.value] || sorters["name-asc"]);
+  elements.externalGrid.replaceChildren();
+
+  if (!visible.length) {
+    const empty = document.createElement("p");
+    empty.className = "empty-cell external-empty";
+    empty.textContent = "No sample products match these filters.";
+    elements.externalGrid.append(empty);
+  } else {
+    for (const product of visible) {
+      const card = document.createElement("article");
+      card.className = "external-product-card";
+
+      const media = document.createElement("div");
+      media.className = "external-product-media";
+      if (/^https:\\/\\//i.test(product.thumbnail)) {
+        const image = document.createElement("img");
+        image.src = product.thumbnail;
+        image.alt = product.name;
+        image.loading = "lazy";
+        media.append(image);
+      } else {
+        media.textContent = "Sample product";
+      }
+
+      const details = document.createElement("div");
+      details.className = "external-product-details";
+      const title = document.createElement("h3");
+      title.textContent = product.name;
+      const category = document.createElement("span");
+      category.className = "category-tag";
+      category.textContent = product.category.replace(/-/g, " ");
+      const price = document.createElement("p");
+      price.className = "external-product-price";
+      price.textContent = new Intl.NumberFormat("en-US", {
+        style: "currency", currency: "USD"
+      }).format(product.price);
+      const stock = document.createElement("p");
+      stock.className = "external-product-stock";
+      stock.textContent = `Sample stock: ${product.stock}`;
+
+      details.append(title, category, price, stock);
+      card.append(media, details);
+      elements.externalGrid.append(card);
+    }
+  }
+
+  elements.externalResultCount.textContent =
+    `Showing ${visible.length} of ${externalProducts.length} public sample products`;
+  renderExternalCategoryTabs();
+}
+
+async function loadExternalProducts() {
+  elements.externalButton.disabled = true;
+  elements.externalSkeletons.hidden = false;
+  elements.externalGrid.replaceChildren();
+  elements.externalControls.hidden = true;
+  elements.externalCategoryTabs.hidden = true;
+  elements.externalResultCount.textContent = "";
+  setExternalStatus("Loading sample products from the public API…");
+
+  try {
+    externalProducts = await api.getPublicProducts();
+    selectedExternalCategory = "all";
+    elements.externalControls.hidden = false;
+    elements.externalCategoryTabs.hidden = false;
+    setExternalStatus(`Loaded ${externalProducts.length} sample products from DummyJSON.`);
+    renderExternalProducts();
+  } catch (error) {
+    externalProducts = [];
+    setExternalStatus(
+      "The public catalogue could not be loaded. Check your internet connection and try again.",
+      true
+    );
+    console.error("Public product API error:", error);
+  } finally {
+    elements.externalSkeletons.hidden = true;
+    elements.externalButton.disabled = false;
+  }
+}
+
 function setupTheme() {
   let savedTheme = "light";
   try { savedTheme = localStorage.getItem("smartstore-theme") || "light"; }
@@ -208,6 +337,15 @@ elements.themeButton.addEventListener("click", () => {
   try { localStorage.setItem("smartstore-theme", nextTheme); }
   catch (error) { console.warn("Could not save theme preference:", error); }
   updateThemeButton();
+});
+elements.externalButton.addEventListener("click", loadExternalProducts);
+elements.externalSearch.addEventListener("input", renderExternalProducts);
+elements.externalSort.addEventListener("change", renderExternalProducts);
+elements.externalCategoryTabs.addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-category]");
+  if (!button) return;
+  selectedExternalCategory = button.dataset.category;
+  renderExternalProducts();
 });
 setupTheme();
 loadProducts();
