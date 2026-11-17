@@ -211,7 +211,7 @@ function renderExternalCategoryTabs() {
     button.dataset.category = category;
     button.textContent = category === "all"
       ? "All categories"
-      : category.replace(/-/g, " ").replace(/\\b\\w/g, (letter) => letter.toUpperCase());
+      : category.replace(/-/g, " ").split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
     button.setAttribute("aria-pressed", String(selectedExternalCategory === category));
     elements.externalCategoryTabs.append(button);
   }
@@ -247,7 +247,7 @@ function renderExternalProducts() {
 
       const media = document.createElement("div");
       media.className = "external-product-media";
-      if (/^https:\\/\\//i.test(product.thumbnail)) {
+      if (product.thumbnail.startsWith("https://")) {
         const image = document.createElement("img");
         image.src = product.thumbnail;
         image.alt = product.name;
