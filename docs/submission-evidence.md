@@ -11,7 +11,7 @@
 | Task | Expected evidence | Current status |
 |---|---|---|
 | 02 — Accessibility and architecture audit | Lighthouse screenshot/score, keyboard notes, five evidence-backed issues with severity/remediation, architecture tree | Lighthouse Accessibility 100 on desktop and mobile (390 × 844). Five source-review findings are documented; focus contrast and live result announcements have fixes committed. Full tab-order and screen-reader retests remain. |
-| 03 — Semantic HTML5 and accessible components | W3C validator result, semantic layout/form/table screenshots | **Passed:** user's W3C Nu HTML Checker screenshot (17 Nov 2026) showed zero errors and zero warnings. |
+| 03 — Semantic HTML5 and accessible components | W3C validator result, semantic layout/form/table screenshots | Semantic header/nav/aside/main/section/article/footer landmarks, responsive sidebar navigation, labelled form controls, captioned table, and accessible modal dialog are in the repository. Earlier W3C run showed zero errors/warnings; **rerun W3C after the sidebar markup change** and capture an updated screenshot before final completion. |
 | 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | **Passed:** visual checks at 320, 768, 1024, and 1440px; page-level overflow expression returned `false` at all four widths. |
 | 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence | **Passed for observed tests:** UI search/filter/sort/CRUD checks, live API GET/POST/PUT/DELETE, and negative 400/404 checks completed. Seven validation unit tests are in the repository. |
 | 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, final feature checks, persistent state | **Deployed and persistence verified:** public GitHub repo and Render app are live; Neon PostgreSQL data remained after a Render service restart. Evidence screenshot collection remains a user-side submission step. |
@@ -263,3 +263,14 @@ This was a user-confirmed manual check; no audio recording or screenshot was pro
 ## Full keyboard navigation check — 17 November 2026
 
 The user confirmed the full keyboard-only navigation pass on the deployed dashboard: skip link, navigation links, theme toggle, Add Product, search, category, sort, and product-row Edit/Delete actions were reachable in a logical order with visible focus. This is a user-confirmed manual test; a screenshot of the entire tab sequence was not supplied.
+
+
+## Task 03 — semantic layout update (17 November 2026)
+
+Added a semantic `aside` workspace sidebar with a separately labelled `nav`. It links to the Dashboard overview and Product management sections. The sidebar uses a desktop left-column layout and switches to a compact two-link row on narrow screens.
+
+- HTML commit: https://github.com/bala20395-hue/smartstore-dashboard/commit/e5ee52cdf0dd2e83a09a44e4524b4c1c354ecaf3
+- CSS commit: https://github.com/bala20395-hue/smartstore-dashboard/commit/8eb08ef2a747b5d713340634b07ef357d8c47910
+- Existing markup includes a skip link, header, navigation landmarks, main content, sections, summary articles, captioned product table, labelled form controls, fieldset/legend, validation attributes, and a native dialog.
+
+The previous W3C result with zero errors/warnings predates the new sidebar markup. Run the Nu HTML Checker again against the newly deployed page before marking the post-sidebar validation as complete. The sidebar provides section navigation within the dashboard document; it does not create separate HTML documents.
