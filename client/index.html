@@ -36,7 +36,12 @@
   <main id="main-content" class="page-shell">
     <section id="overview" class="page-heading" aria-labelledby="page-title">
       <div><p class="eyebrow">STORE MANAGEMENT</p><h1 id="page-title">Dashboard overview</h1><p class="muted">Welcome to your SmartStore management system.</p></div>
-      <span class="status-pill"><span class="status-dot"></span> Demo workspace</span>
+      <div class="workspace-account">
+        <span class="status-pill" id="demo-session-status" role="status" aria-live="polite">
+          <span class="status-dot"></span> Demo workspace · Signed out
+        </span>
+        <button class="button button-secondary demo-auth-button" id="demo-auth-button" type="button">Demo sign in</button>
+      </div>
     </section>
     <section class="stats-grid" aria-label="Store summary">
       <article class="stat-card">
@@ -107,6 +112,30 @@
   </main>
   </div>
   <footer class="footer"><p>SmartStore Dashboard <span aria-hidden="true">·</span> Full Stack learning project</p></footer>
+  <dialog id="auth-dialog" class="product-dialog auth-dialog" aria-labelledby="auth-dialog-title">
+    <form id="auth-form" novalidate>
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">DEMO ACCESS</p>
+          <h2 id="auth-dialog-title">Enter your workspace</h2>
+        </div>
+        <button class="icon-button" id="close-auth-dialog" type="button" aria-label="Close sign-in dialog">×</button>
+      </div>
+      <fieldset class="form-fields">
+        <legend class="sr-only">Demo profile details</legend>
+        <div class="form-field">
+          <label for="demo-display-name">Display name</label>
+          <input id="demo-display-name" name="displayName" type="text" maxlength="40" autocomplete="name" required aria-describedby="demo-auth-help demo-auth-error">
+          <small class="field-error" id="demo-auth-error" aria-live="polite"></small>
+        </div>
+      </fieldset>
+      <p class="auth-demo-note" id="demo-auth-help">Demo-only sign-in: no password or real account is used. Your display name is stored in this browser tab only. This does not secure API access.</p>
+      <div class="dialog-actions">
+        <button class="button button-secondary" id="cancel-auth-button" type="button">Cancel</button>
+        <button class="button button-primary" type="submit">Enter workspace</button>
+      </div>
+    </form>
+  </dialog>
   <dialog id="product-dialog" class="product-dialog" aria-labelledby="dialog-title">
     <form id="product-form" novalidate>
       <div class="dialog-heading"><div><p class="eyebrow">PRODUCT DETAILS</p><h2 id="dialog-title">Add product</h2></div><button class="icon-button" id="close-dialog-button" type="button" aria-label="Close dialog">×</button></div>
