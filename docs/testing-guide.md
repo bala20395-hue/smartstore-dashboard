@@ -84,3 +84,17 @@ Record `false` only when observed. The earlier viewport checks occurred before t
 Source documentation: https://dummyjson.com/docs/products
 
 The DummyJSON catalogue is sample data. Its documented POST/PUT/DELETE examples simulate writes and are not persistent.
+
+
+## Task 06 — demo authentication simulation checks
+
+1. Open the deployed dashboard.
+2. Locate the **Demo sign in** button in the dashboard overview.
+3. Activate it with mouse or keyboard.
+4. Enter a display name and select **Enter workspace**.
+5. Confirm the dashboard status identifies the demo display name and the button changes to **Demo sign out**.
+6. Refresh the same browser tab and confirm the demo session remains.
+7. Select **Demo sign out** and confirm the status becomes signed out.
+8. Open a new tab and confirm that the old tab's session is not shared with the new tab.
+
+This is only a front-end demonstration. It does not authenticate requests or protect the public product API.
