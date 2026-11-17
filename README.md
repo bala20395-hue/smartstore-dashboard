@@ -5,6 +5,7 @@ A responsive product-management dashboard built with HTML5, CSS3, vanilla JavaSc
 ## Features
 
 - Dashboard summary cards and product inventory table
+- Demo authentication simulation with tab-scoped sign-in/sign-out session state (not real security)
 - REST API for listing, creating, editing, and deleting products
 - Public REST API integration with a read-only DummyJSON sample product catalogue
 - Search, category filtering, and sorting for the saved inventory and external sample catalogue
