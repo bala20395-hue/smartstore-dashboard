@@ -47,3 +47,23 @@ Invoke-RestMethod -Method Delete -Uri "$base/api/products/$($created.id)"
 ## Evidence
 
 Capture actual browser screenshots and command output. Do not record a check as passed until it has been performed. When `DATABASE_URL` is configured, product records are stored in PostgreSQL and persist across service restarts. Without `DATABASE_URL`, the app uses in-memory demo records that reset when the server process restarts. LocalStorage is only a browser-side cache.
+
+
+## Task 04 — final responsive regression after sidebar/CSS update
+
+After deploying the latest CSS, repeat these checks at each viewport:
+
+| Viewport | Expected layout |
+|---|---|
+| 320 × 700 | Single-column stats, stacked product cards, compact sidebar links |
+| 768 × 1024 | Horizontal two-link sidebar, two-column stats, responsive controls |
+| 1024 × 768 | Desktop sidebar and content grid, three-column stats where space allows |
+| 1440 × 900 | Wide desktop sidebar/content grid and three-column stats |
+
+In Chrome DevTools Console, run this expression at each viewport:
+
+```js
+document.documentElement.scrollWidth > document.documentElement.clientWidth
+```
+
+Record `false` only when observed. The earlier viewport checks occurred before the semantic sidebar and most recent breakpoint updates, so they are not a substitute for this regression pass.
