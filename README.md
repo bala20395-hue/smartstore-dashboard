@@ -6,9 +6,10 @@ A responsive product-management dashboard built with HTML5, CSS3, vanilla JavaSc
 
 - Dashboard summary cards and product inventory table
 - REST API for listing, creating, editing, and deleting products
-- Search, category filtering, and sorting
-- LocalStorage browser cache and saved light/dark theme
-- Loading, empty, and error states
+- Public REST API integration with a read-only DummyJSON sample product catalogue
+- Search, category filtering, and sorting for the saved inventory and external sample catalogue
+- LocalStorage browser cache and saved light/dark theme preference
+- Loading skeletons, empty states, and user-friendly API error feedback
 - Semantic HTML landmarks, skip link, labelled form fields, table caption and headings
 - Accessible product dialog with focus restoration and inline validation associations
 - Responsive dashboard shell with semantic sidebar navigation using CSS Grid, Flexbox, fluid breakpoints, CSS design tokens, subtle glassmorphism/backdrop blur, soft shadows, hover transitions, and light/dark theme variables
