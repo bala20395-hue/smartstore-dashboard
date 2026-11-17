@@ -110,10 +110,19 @@ Render settings:
 
 Live app: https://smartstore-dashboard-i1t1.onrender.com
 
-## Accessibility evidence
+## Accessibility and architecture review
 
-The audit worksheet is not a completed Lighthouse audit. Run Lighthouse and a keyboard-only pass on the selected public website, save genuine screenshots, and enter only findings actually observed. See `docs/submission-evidence.md` and `docs/testing-guide.md`.
+The 16 November 2026 Lighthouse captures showed Accessibility 100 on desktop and on mobile emulation (390 × 844). Keyboard checks were recorded for the product dialog, Edit/Delete focus, category filtering, sorting, and search. These results do not replace a full screen-reader or WCAG conformance review.
+
+The source review documented five findings in `docs/accessibility-audit.md`. Two accessibility improvements were committed: stronger focus-indicator contrast and live announcements for the product result count. Verify both after the latest Render deployment. Authentication, API rate limiting, and pagination remain production-hardening recommendations.
+
+See `docs/accessibility-audit.md`, `docs/submission-evidence.md`, and `docs/testing-guide.md` for test results and evidence filenames.
 
 ## Repository
 
 https://github.com/bala20395-hue/smartstore-dashboard
+
+
+## Demo security scope
+
+This public learning demo does not include user authentication, role-based authorization, or API rate limiting. Do not use it to manage confidential or business-critical inventory without adding those protections.
