@@ -912,3 +912,34 @@ tbody tr:hover {
     animation: none;
   }
 }
+
+
+/* Demo authentication simulation */
+.workspace-account {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: .65rem;
+}
+
+.demo-auth-button {
+  white-space: nowrap;
+}
+
+.auth-demo-note {
+  margin: .25rem 0 1rem;
+  padding: .75rem;
+  color: var(--muted);
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-sm);
+}
+
+@media (max-width: 520px) {
+  .workspace-account {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
