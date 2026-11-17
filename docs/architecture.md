@@ -92,3 +92,21 @@ The browser validates required fields and sends JSON to Express. The server vali
 - API request rate limiting is not configured. Add route-level and/or edge-level rate limiting before wider public use.
 - The product-list query currently returns the full catalogue. Add bounded pagination when the catalogue grows.
 - The two accessibility source fixes (theme-aware high-contrast focus indicators and a live result-count status) are committed on the main branch. Verify them on the deployed app and test the announcements with a screen reader.
+
+
+## Semantic page and component structure
+
+The dashboard shell uses these semantic regions:
+
+- `header.topbar`: brand, primary page links, and theme control.
+- `aside.sidebar`: secondary workspace navigation for the Dashboard overview and Products section.
+- `nav.main-nav` and `nav.sidebar-nav`: separately labelled navigation landmarks.
+- `main#main-content`: the primary page content, targeted by the skip link.
+- `section#overview`: dashboard heading and summary region.
+- `article.stat-card`: individual product, stock, and catalogue-value summaries.
+- `section#products`: product management, filters, live status, and data table.
+- `table`: captioned product inventory table with scoped column headings.
+- `dialog#product-dialog`: accessible add/edit product form with labelled controls, fieldset/legend, inline error descriptions, and validation states.
+- `footer.footer`: project footer.
+
+The sidebar is a responsive section-navigation pattern: it links to the two main dashboard sections in the same document. It is not a separate multi-document page router. On narrow screens the sidebar links become a two-column navigation row.
