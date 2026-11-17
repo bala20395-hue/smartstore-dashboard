@@ -66,6 +66,44 @@
       <div class="table-wrap"><table><caption class="sr-only">Product inventory with category, price, stock, and actions</caption><thead><tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col">Price</th><th scope="col">Stock</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody id="product-rows"></tbody></table></div>
       <p class="table-footer" id="result-count" role="status" aria-live="polite" aria-atomic="true"></p>
     </section>
+    <section id="external-catalog" class="panel external-catalog" aria-labelledby="external-catalog-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PUBLIC API INTEGRATION</p>
+          <h2 id="external-catalog-title">External product catalogue</h2>
+          <p class="muted">Fetch a read-only sample catalogue from DummyJSON without changing your saved inventory.</p>
+        </div>
+        <button class="button button-secondary" id="load-external-button" type="button">Fetch public products</button>
+      </div>
+      <p class="api-source-note">Data source: <a href="https://dummyjson.com/docs/products" target="_blank" rel="noopener noreferrer">DummyJSON Products API</a> · Sample data only · Prices shown in USD</p>
+      <p id="external-status" class="status-message" role="status" aria-live="polite">Select “Fetch public products” to load sample data from the public REST API.</p>
+      <div id="external-controls" class="external-controls" hidden>
+        <div class="field external-search">
+          <label for="external-search-input">Search public products</label>
+          <input id="external-search-input" type="search" placeholder="Search sample products…" autocomplete="off">
+        </div>
+        <div class="field external-sort">
+          <label for="external-sort-select">Sort public products</label>
+          <select id="external-sort-select">
+            <option value="name-asc">Name (A–Z)</option>
+            <option value="price-asc">Price (low to high)</option>
+            <option value="price-desc">Price (high to low)</option>
+            <option value="stock-desc">Stock (high to low)</option>
+          </select>
+        </div>
+      </div>
+      <div id="external-category-tabs" class="category-tabs" role="group" aria-label="Filter public products by category" hidden></div>
+      <div id="external-skeletons" class="external-product-grid" aria-hidden="true" hidden>
+        <div class="external-skeleton-card"><span></span><span></span><span></span></div>
+        <div class="external-skeleton-card"><span></span><span></span><span></span></div>
+        <div class="external-skeleton-card"><span></span><span></span><span></span></div>
+        <div class="external-skeleton-card"><span></span><span></span><span></span></div>
+        <div class="external-skeleton-card"><span></span><span></span><span></span></div>
+        <div class="external-skeleton-card"><span></span><span></span><span></span></div>
+      </div>
+      <div id="external-product-grid" class="external-product-grid" aria-live="polite"></div>
+      <p id="external-result-count" class="table-footer"></p>
+    </section>
   </main>
   </div>
   <footer class="footer"><p>SmartStore Dashboard <span aria-hidden="true">·</span> Full Stack learning project</p></footer>
