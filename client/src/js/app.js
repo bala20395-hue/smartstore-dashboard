@@ -11,6 +11,14 @@ const elements = {
   formError: document.querySelector("#form-error"), addButton: document.querySelector("#add-product-button"),
   closeButton: document.querySelector("#close-dialog-button"), cancelButton: document.querySelector("#cancel-button"),
   themeButton: document.querySelector("#theme-toggle"),
+  demoAuthButton: document.querySelector("#demo-auth-button"),
+  demoSessionStatus: document.querySelector("#demo-session-status"),
+  authDialog: document.querySelector("#auth-dialog"),
+  authForm: document.querySelector("#auth-form"),
+  authDisplayName: document.querySelector("#demo-display-name"),
+  authError: document.querySelector("#demo-auth-error"),
+  closeAuthButton: document.querySelector("#close-auth-dialog"),
+  cancelAuthButton: document.querySelector("#cancel-auth-button"),
   externalButton: document.querySelector("#load-external-button"),
   externalStatus: document.querySelector("#external-status"),
   externalControls: document.querySelector("#external-controls"),
@@ -25,6 +33,91 @@ let products = [];
 let externalProducts = [];
 let selectedExternalCategory = "all";
 let dialogTrigger = null;
+let authDialogTrigger = null;
+let demoSession = readDemoSession();
+
+function readDemoSession() {
+  try {
+    const session = JSON.parse(sessionStorage.getItem("smartstore-demo-session") || "null");
+    return session && typeof session.displayName === "string"
+      ? { displayName: session.displayName }
+      : null;
+  } catch (error) {
+    console.warn("Could not read the demo session:", error);
+    return null;
+  }
+}
+
+function updateDemoSessionUI() {
+  const signedIn = Boolean(demoSession);
+  elements.demoSessionStatus.innerHTML = '<span class="status-dot"></span>';
+  elements.demoSessionStatus.append(
+    document.createTextNode(
+      signedIn
+        ? ` Demo workspace · Signed in as ${demoSession.displayName}`
+        : " Demo workspace · Signed out"
+    )
+  );
+  elements.demoAuthButton.textContent = signedIn ? "Demo sign out" : "Demo sign in";
+  elements.demoAuthButton.setAttribute(
+    "aria-label",
+    signedIn
+      ? `Sign out of the demo workspace for ${demoSession.displayName}`
+      : "Sign in to the demo workspace"
+  );
+}
+
+function openAuthDialog() {
+  authDialogTrigger = document.activeElement;
+  elements.authForm.reset();
+  elements.authError.textContent = "";
+  elements.authDialog.showModal();
+  elements.authDisplayName.focus();
+}
+
+function closeAuthDialog() {
+  elements.authDialog.close();
+  if (authDialogTrigger instanceof HTMLElement && authDialogTrigger.isConnected) {
+    authDialogTrigger.focus();
+  } else {
+    elements.demoAuthButton.focus();
+  }
+  authDialogTrigger = null;
+}
+
+function signInToDemoWorkspace(event) {
+  event.preventDefault();
+  const displayName = elements.authDisplayName.value.trim();
+  if (!displayName) {
+    elements.authError.textContent = "Enter a display name to continue.";
+    elements.authDisplayName.focus();
+    return;
+  }
+
+  demoSession = { displayName: displayName.slice(0, 40) };
+  try {
+    sessionStorage.setItem("smartstore-demo-session", JSON.stringify(demoSession));
+  } catch (error) {
+    console.warn("Could not persist the demo session for this tab:", error);
+  }
+  updateDemoSessionUI();
+  elements.authDialog.close();
+  if (authDialogTrigger instanceof HTMLElement && authDialogTrigger.isConnected) {
+    authDialogTrigger.focus();
+  }
+  authDialogTrigger = null;
+}
+
+function signOutOfDemoWorkspace() {
+  demoSession = null;
+  try {
+    sessionStorage.removeItem("smartstore-demo-session");
+  } catch (error) {
+    console.warn("Could not clear the demo session:", error);
+  }
+  updateDemoSessionUI();
+  elements.demoAuthButton.focus();
+}
 
 function saveCache() {
   try { localStorage.setItem(CACHE_KEY, JSON.stringify(products)); }
@@ -338,6 +431,16 @@ elements.themeButton.addEventListener("click", () => {
   catch (error) { console.warn("Could not save theme preference:", error); }
   updateThemeButton();
 });
+elements.demoAuthButton.addEventListener("click", () => {
+  if (demoSession) signOutOfDemoWorkspace();
+  else openAuthDialog();
+});
+elements.authForm.addEventListener("submit", signInToDemoWorkspace);
+elements.closeAuthButton.addEventListener("click", closeAuthDialog);
+elements.cancelAuthButton.addEventListener("click", closeAuthDialog);
+elements.authDialog.addEventListener("click", (event) => {
+  if (event.target === elements.authDialog) closeAuthDialog();
+});
 elements.externalButton.addEventListener("click", loadExternalProducts);
 elements.externalSearch.addEventListener("input", renderExternalProducts);
 elements.externalSort.addEventListener("change", renderExternalProducts);
@@ -348,4 +451,5 @@ elements.externalCategoryTabs.addEventListener("click", (event) => {
   renderExternalProducts();
 });
 setupTheme();
+updateDemoSessionUI();
 loadProducts();
