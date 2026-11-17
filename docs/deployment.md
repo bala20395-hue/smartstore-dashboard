@@ -31,4 +31,4 @@ Do not put the connection string in GitHub, source files, screenshots, or public
 
 Free Render web services use an ephemeral filesystem, so a SQLite file on the web-service filesystem is not durable. Free Render Postgres expires after 30 days. A separate PostgreSQL provider can supply a persistent free database, subject to that provider's usage and inactivity limits. See the official Render and Neon free-tier documentation before using this for anything beyond a demo.
 
-The app's database integration is implemented, but persistent production mode is not active until a valid `DATABASE_URL` is added in Render.
+For this deployment, `DATABASE_URL` has been configured in Render and PostgreSQL persistence was verified on 17 November 2026: a test product was created, the Render service was restarted, and the record remained available in the application and Neon database. The connection string is stored as a Render environment secret and is not included in this repository.
