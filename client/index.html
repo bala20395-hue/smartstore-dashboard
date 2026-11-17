@@ -18,6 +18,21 @@
     </nav>
     <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch to dark theme">◐</button>
   </header>
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="Workspace sidebar">
+      <p class="sidebar-heading">WORKSPACE</p>
+      <nav class="sidebar-nav" aria-label="Workspace navigation">
+        <a class="sidebar-link" href="#overview" aria-current="page">
+          <span class="sidebar-link-title">Dashboard</span>
+          <span class="sidebar-link-description">Store overview</span>
+        </a>
+        <a class="sidebar-link" href="#products">
+          <span class="sidebar-link-title">Products</span>
+          <span class="sidebar-link-description">Manage inventory</span>
+        </a>
+      </nav>
+      <p class="sidebar-note">SmartStore inventory workspace</p>
+    </aside>
   <main id="main-content" class="page-shell">
     <section id="overview" class="page-heading" aria-labelledby="page-title">
       <div><p class="eyebrow">STORE MANAGEMENT</p><h1 id="page-title">Dashboard overview</h1><p class="muted">Welcome to your SmartStore management system.</p></div>
@@ -52,6 +67,7 @@
       <p class="table-footer" id="result-count" role="status" aria-live="polite" aria-atomic="true"></p>
     </section>
   </main>
+  </div>
   <footer class="footer"><p>SmartStore Dashboard <span aria-hidden="true">·</span> Full Stack learning project</p></footer>
   <dialog id="product-dialog" class="product-dialog" aria-labelledby="dialog-title">
     <form id="product-form" novalidate>
