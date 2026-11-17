@@ -12,7 +12,7 @@
 |---|---|---|
 | 02 — Accessibility and architecture audit | Lighthouse screenshot/score, keyboard notes, five evidence-backed issues with severity/remediation, architecture tree | Desktop and mobile Lighthouse screenshots from 16 November 2026 both show Accessibility 100 (mobile emulation 390 × 844). Save them as `task02-lighthouse-desktop-after-fix.png` and `task02-lighthouse-mobile.png`; remaining keyboard/manual checks and five evidence-backed findings are still required. |
 | 03 — Semantic HTML5 and accessible components | W3C validator result, semantic layout/form/table screenshots | Semantic markup and accessible form associations are implemented. Capture the validator result. |
-| 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | Visual evidence collected at 320px, 768px, 1024px, and 1440px. Programmatic page-level overflow check and completion of all 768px/1024px full-page checks remain pending. |
+| 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | Visual evidence collected at 320px, 768px, 1024px, and 1440px. Page-level overflow expression returned `false` at all four widths (320, 768, 1024, 1440 CSS px). Retain the screenshots as course evidence. |
 | 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence | Features and validation tests are present. Capture genuine deployed test evidence. |
 | 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, final feature checks, persistent state | GitHub and Render deployment are available. PostgreSQL adapter is implemented; set Render `DATABASE_URL` and test data across restart before marking persistence complete. |
 
@@ -162,6 +162,17 @@ The user ran the same Chrome DevTools expression at the **768 × 1024** responsi
 Observed result: **`false`**.
 
 Interpretation: no page-level horizontal overflow was detected at the tested 768px viewport. This does not rule out internal overflow regions such as the product table's own scroller.
+
+
+## Page-level horizontal overflow check — 1440px (17 November 2026)
+
+The user ran the same Chrome DevTools expression at the **1440 × 900** responsive viewport:
+
+`document.documentElement.scrollWidth > document.documentElement.clientWidth`
+
+Observed result: **`false`**.
+
+Interpretation: no page-level horizontal overflow was detected at the tested 1440px viewport. This does not rule out internal overflow regions such as the product table's own scroller.
 
 ## Page-level horizontal overflow check — 320px (17 November 2026)
 
