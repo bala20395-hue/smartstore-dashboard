@@ -11,7 +11,7 @@ A responsive product-management dashboard built with HTML5, CSS3, vanilla JavaSc
 - Loading, empty, and error states
 - Semantic HTML landmarks, skip link, labelled form fields, table caption and headings
 - Accessible product dialog with focus restoration and inline validation associations
-- Responsive dashboard shell with semantic sidebar navigation using CSS Grid, Flexbox, design tokens, and media queries
+- Responsive dashboard shell with semantic sidebar navigation using CSS Grid, Flexbox, fluid breakpoints, CSS design tokens, subtle glassmorphism/backdrop blur, soft shadows, hover transitions, and light/dark theme variables
 - Server-side validation and automated validation tests
 - Optional PostgreSQL persistence through a `DATABASE_URL` environment variable
 
