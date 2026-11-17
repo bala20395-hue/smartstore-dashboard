@@ -12,7 +12,7 @@
 |---|---|---|
 | 02 — Accessibility and architecture audit | Lighthouse screenshot/score, keyboard notes, five evidence-backed issues with severity/remediation, architecture tree | Lighthouse Accessibility 100 on desktop and mobile (390 × 844). Five source-review findings are documented; focus contrast and live result announcements have fixes committed. Full tab-order and screen-reader retests remain. |
 | 03 — Semantic HTML5 and accessible components | W3C validator result, semantic layout/form/table screenshots | Semantic header/nav/aside/main/section/article/footer landmarks, responsive sidebar navigation, labelled form controls, captioned table, and accessible modal dialog are in the repository. Earlier W3C run showed zero errors/warnings; **rerun W3C after the sidebar markup change** and capture an updated screenshot before final completion. |
-| 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | **Passed:** visual checks at 320, 768, 1024, and 1440px; page-level overflow expression returned `false` at all four widths. |
+| 04 — Responsive CSS architecture | Screenshots at 320px, 768px, 1024px, 1440px; no page-level horizontal overflow | CSS now includes design tokens, responsive sidebar/grid breakpoints, glassmorphism/backdrop blur, shadows, transitions, theme variables, and reduced-motion handling. The earlier four viewport/overflow checks predate the sidebar and latest CSS; repeat them on the updated deployment and save fresh screenshots before marking final responsive verification complete. |
 | 05 — JavaScript DOM and REST API | Search/filter/sort/CRUD screenshots and GET/POST/PUT/DELETE evidence | **Passed for observed tests:** UI search/filter/sort/CRUD checks, live API GET/POST/PUT/DELETE, and negative 400/404 checks completed. Seven validation unit tests are in the repository. |
 | 06 — Capstone and deployment | GitHub URL, live URL, README, architecture diagram, final feature checks, persistent state | **Deployed and persistence verified:** public GitHub repo and Render app are live; Neon PostgreSQL data remained after a Render service restart. Evidence screenshot collection remains a user-side submission step. |
 
@@ -274,3 +274,34 @@ Added a semantic `aside` workspace sidebar with a separately labelled `nav`. It 
 - Existing markup includes a skip link, header, navigation landmarks, main content, sections, summary articles, captioned product table, labelled form controls, fieldset/legend, validation attributes, and a native dialog.
 
 The previous W3C result with zero errors/warnings predates the new sidebar markup. Run the Nu HTML Checker again against the newly deployed page before marking the post-sidebar validation as complete. The sidebar provides section navigation within the dashboard document; it does not create separate HTML documents.
+
+
+## Task 04 — responsive design system update (17 November 2026)
+
+Latest CSS update:
+- Added spacing, typography, border-radius, and transition custom-property tokens alongside theme colors and shadows.
+- Added translucent glass surfaces and backdrop blur to the top bar, sidebar, summary cards, and product panel.
+- Added hover transitions/lift effects and reduced-motion handling.
+- Adjusted the 768–1023px tablet layout to use a compact horizontal sidebar navigation and two-column statistics.
+- Kept a one-column mobile statistics/form layout at narrow widths and full-width content inside the desktop grid.
+- Preserved light and dark theme token sets.
+
+CSS commit: https://github.com/bala20395-hue/smartstore-dashboard/commit/2f92cfe480b9ebfbc745f0e973be1aede519faed
+
+### Required post-change evidence
+
+The earlier screenshots and page-overflow checks were captured before the semantic sidebar was added. They must not be presented as validation of the latest CSS. After the Render deploy is live, capture fresh screenshots and run the document-level overflow expression at 320, 768, 1024, and 1440 CSS pixels.
+
+Suggested filenames:
+- `task04-320px-latest.png`
+- `task04-768px-latest.png`
+- `task04-1024px-latest.png`
+- `task04-1440px-latest.png`
+
+At each viewport, run:
+
+```js
+document.documentElement.scrollWidth > document.documentElement.clientWidth
+```
+
+Expected result for each viewport: `false`. Record only the values actually observed on the deployed latest build.
