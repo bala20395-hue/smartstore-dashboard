@@ -124,3 +124,17 @@ The CSS design system in `client/src/css/styles.css` includes:
 - Light and dark theme variable sets, plus reduced-motion handling.
 
 The 320/768/1024/1440 viewport and page-overflow observations recorded before the semantic sidebar was introduced must be repeated against the latest deployed layout.
+
+
+## External public REST API flow
+
+The dashboard includes a separate, read-only sample catalogue preview so that third-party demo data never overwrites the PostgreSQL inventory.
+
+1. The user activates **Fetch public products** in the External product catalogue section.
+2. `client/src/js/app.js` calls `api.getPublicProducts()`.
+3. `client/src/js/api.js` performs an asynchronous GET request to DummyJSON: `https://dummyjson.com/products?limit=12&select=id,title,price,stock,category,thumbnail`.
+4. The API client normalizes the response to the dashboard's sample-product shape (name, category, price, stock, thumbnail).
+5. The browser renders the preview cards and category tabs. Search and sort update the preview DOM without a page reload.
+6. Loading skeletons appear while the request is pending; a friendly status error is shown when the API cannot be reached.
+
+The sample catalogue is read-only and does not create, edit, or delete the user's Neon/PostgreSQL product records. DummyJSON describes this endpoint as fictional/sample product data for testing and prototyping. Its simulated write examples do not persist changes on its service.
